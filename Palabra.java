@@ -1,48 +1,29 @@
 public class Palabra {
 
-	final private String valor;
+	final private String contenido; //es final?
+	private int frecuencia;
 	private int x;
 	private int y;
-	private int w;
-	private int h;
+	private int fontSize;
+	private int width;
+	private int height;
+	
+	//signos
 
-
-	public Palabra(String valor, int x, int y, int w, int h) {
-		this.valor = valor;
-		this.x=x;
-		this.y=y;
-		this.w=w;
-		this.h=h;
+	public Palabra(String contenido, int frecuencia, int x, int y, int fontSize, int width, int height) {
+		this.contenido = contenido;
+		this.frecuencia = frecuencia;
+		this.x = x;
+		this.y = y;
+		this.fontSize = fontSize;
+		this.width = width;
+		this.height = height;
 	}
 
-	public int frecuencia(File archivo){
-		
-		int cont = 1;
-		
-		try{
-			FileReader fileReader = new FileReader(archivo);
-			BufferedReader reader = new BufferedReader(fileReader);
-			String line = null;
-			
-			while((line = reader.readLine()) != null){
-			
-				String[] p = line.split(" "); //separa palabra por palabra y las guarda en el arreglo palabras
-			
-				for(int i=0; i<p.length; i++){
-				
-					if(valor.equals(p[i]))
-						cont++;
-				}
-			}
-		}
-		catch(IOException ioe){
-			ioe.printStackTrace();
-		}
-		
-		return cont;
+	public String getContenido(){
+		return contenido;
 	}
-
-}
-
+	
+	//tu método mágico aquí
 
 }
