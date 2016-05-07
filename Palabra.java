@@ -17,17 +17,9 @@ public class Palabra {
 		frecuencia=1;
 	}
 
-	public String getContenido(){
-		return contenido;
-	}
-
 	public void ActualizarFrecuencia() {
 		//este metodo se llama cada vez que se encuentra esta palabra en el texto
 		frecuencia++;
-	}
-
-	public int getFrecuencia() {
-		return frecuencia;
 	}
 
 	public void setCoordenadas(int x, int y) {
@@ -42,24 +34,24 @@ public class Palabra {
 		width=label.prefWidth(-1)
 	}
 
+	public String getContenido(){
+		return contenido;
+	}
+
+	public int getFrecuencia() {
+		return frecuencia;
+	}
+
 	public Label getLabel() {
 		return label;
 	}
 
-	public int getX() {
-		return x;
-	}
+	public int getX() {	return x; }
 
-	public int getY(){
-		return y;
-	}
+	public int getY(){ return y; }
 
-	public int getWidth() {
-		return width;
-	}
+	public int getWidth() { return width; }
 
-	public int getHeight() {
-		return  height;
-	}
+	public int getHeight() { return  height; }
 
 }
