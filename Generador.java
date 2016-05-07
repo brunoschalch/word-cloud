@@ -7,7 +7,7 @@ public abstract class Generador implements Graficable{
 	protected String texto;
 	protected int limite;
 	
-	//signos en variables
+	//signos en variables..
 	//son public?
 	//falta el void de el metodo?
 	//falta el limite?
