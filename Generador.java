@@ -50,4 +50,8 @@ public abstract class Generador implements Graficable{
 
 	}
 
+	public int funcionCirculo(int x) { //recibe un valor x  regresa el valor (positivo?) correspondiente de la funcion x^2 + y^2 = r^2
+
+	}
+
 }
