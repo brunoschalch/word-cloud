@@ -42,8 +42,24 @@ public class Palabra {
 		width=label.prefWidth(-1)
 	}
 
-	private Label getLabel() {
+	public Label getLabel() {
 		return label;
+	}
+
+	public int getX() {
+		return x;
+	}
+
+	public int getY(){
+		return y;
+	}
+
+	public int getWidth() {
+		return width;
+	}
+
+	public int getHeight() {
+		return  height;
 	}
 
 }

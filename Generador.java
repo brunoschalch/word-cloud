@@ -23,10 +23,11 @@ public abstract class Generador implements Graficable{
 		llenarArreglo();
 		determinarFontSizePorPalabra();
 		//ahora iniciar UI y acomodar todas las labels donde deben ir
-
+		Scene escena = crearNube();
+		acomodarPalabras(escena);
 
 	}
-	
+
 	public abstract void llenarArreglo(); //el unico metodo que se queda abstracto es llenarArreglo porque uno tiene lista negra y el otro no
 
 	public void determinarFontSizePorPalabra() {
@@ -39,7 +40,14 @@ public abstract class Generador implements Graficable{
 		}
 
 	}
-	
-	/*public Scene crearNube(){
-	}*/
+
+	public Scene crearNube() {
+		//crear UI y mostrarala como siempre y regresar la escena
+	}
+
+	public void acomodarPalabras(Scene escena) {
+		//gran metodo donde se va acomodando la label de cada palabra del arreglo, para esto se usa el metodo setCoordenadas(int x, int y) de cada palabra y se saca la info con getX(), getY(), getwidth() y getHeight()
+
+	}
+
 }
