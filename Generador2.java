@@ -16,8 +16,8 @@ public class Generador2 extends Generador{
 	}
 
 	@Override
-	public void llenarArreglo(){
-
+	public void llenarArreglo(){ //aqui tambien se van generando las labels y se guardan en el estado de cada palabra, gracias a la agregacion se pueden recuperar con getLabel y usar en el UI en esta clase
+		//importante ordenar el arreglo de palabra mas usada a menos usada
 	}
 
 }

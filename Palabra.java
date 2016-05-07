@@ -26,6 +26,10 @@ public class Palabra {
 		frecuencia++;
 	}
 
+	public int getFrecuencia() {
+		return frecuencia;
+	}
+
 	public void setCoordenadas(int x, int y) {
 		this.x=x;
 		this.y=y;
@@ -36,6 +40,10 @@ public class Palabra {
 		label.setFont(new Font("Arial", fontSize));
 		height=label.prefHeight(-1)
 		width=label.prefWidth(-1)
+	}
+
+	private Label getLabel() {
+		return label;
 	}
 
 }
