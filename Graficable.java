@@ -8,8 +8,8 @@ import javafx.scene.text.Font;
 
 public interface Graficable{
 
-	public Scene crearNube(); //cambiar to lower case
+	public abstract Scene crearNube(); //cambiar to lower case
 	
 	//methods of an interface are implicitly public
-	//hay que poner los signos de variables
+	//hay que poner los signos de variables -que signos de variables?
 }
