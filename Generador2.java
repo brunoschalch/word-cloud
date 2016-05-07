@@ -11,7 +11,8 @@ public class Generador2 extends Generador{
 
 	@Override
 	public void iniciar(){ //no tiene argumentos porque todo está en el estado
-
+		llenarArreglo();
+		//ahora iniciar UI
 	}
 
 	@Override

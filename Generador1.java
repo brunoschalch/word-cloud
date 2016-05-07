@@ -9,6 +9,9 @@ public class Generador1 extends Generador{
 	//no hay estado.
 	@Override
 	public void iniciar(){ //no tiene argumentos porque todo está en el estado
+		llenarArreglo();
+		//ahora iniciar UI
+
 
 	}
 
