@@ -27,9 +27,6 @@ public abstract class Generador implements Graficable{
 		//este metodo usa el arreglo palabras y basado en la frecuencia de cada palabra y la cantidad de palabras determina el tamaño de cada una, se manda llamar despues de iniciar el arreglo
 		int cantidadPalabras=0;
 		int frecuenciaMax=palabras[0].getFrecuencia();
-		for (Palabra palabra:palabras) {
-			cantidadPalabras+=palabra.getFrecuencia();
-		}
 		//el tamaño debe ser proporcional al uso de cada palabra, todo relativo a maxFontSize con regla de 3, el arreglo palabras debe estar ordenado de mayor a menor frecuencia
 		for (Palabra palabra:palabras) {
 			palabra.setFontSize(palabra.getFrecuencia()*maxFontSize/frecuenciaMax);
