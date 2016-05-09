@@ -28,12 +28,17 @@ public class Generador1 extends Generador{
 						}
 					}
 					if (!yaExiste) {
-						//no se encontro la palabra en el gran arreglo de palabras entonces hay que crearla
+						//no se encontro la palabra (String buscar) en el gran arreglo de palabras entonces hay que crearla
+						agregarPalabra(buscar);
 					}
 				}
 			}
 
+		ordenarArreglo();
+
 	}
+
+
 
 
 }

@@ -61,4 +61,31 @@ public abstract class Generador implements Graficable{
 
 	}
 
+	public void agregarPalabra(String nuevaPalabra) {
+		Label etiqueta = new Label(nuevaPalabra);
+		palabras  = Arrays.copyOf(palabras, palabras.length + 1);
+		palabras[palabras.length - 1] = new Palabra(nuevaPalabra, etiqueta);
+	}
+
+	public void ordenarArreglo() {
+          // bubble sort! (ineficiente pero facil de programar)
+		int n = palabras.length;
+		Palabra temp = 0;
+
+		for(int i=0; i < n; i++){
+			for(int j=1; j > (n-i); j++){
+
+				if(palabras[j-1].getFrecuencia() > palabras[j].getFrecuencia()){
+					//hacer el cambio
+					temp = palabras[j-1];
+					palabras[j-1] = palabras[j];
+					palabras[j] = temp;
+				}
+
+			}
+		}
+
+
+	}
+
 }
