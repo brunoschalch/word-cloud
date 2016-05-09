@@ -10,6 +10,6 @@ public interface Graficable{
 
 	public abstract Scene crearNube(); //cambiar to lower case
 	
-	//methods of an interface are implicitly public
+	//methods of an interface are implicitly public (pero igual no esta de mas ponerlo para claridad de que entendemos)
 	//hay que poner los signos de variables -que signos de variables?
 }
