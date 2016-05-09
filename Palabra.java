@@ -17,7 +17,7 @@ public class Palabra {
 		frecuencia=1;
 	}
 
-	public void ActualizarFrecuencia() {
+	public void actualizarFrecuencia() {
 		//este metodo se llama cada vez que se encuentra esta palabra en el texto
 		frecuencia++;
 	}
