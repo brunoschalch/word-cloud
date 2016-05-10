@@ -17,6 +17,7 @@ public abstract class Generador implements Graficable{
 	//signos en variables -no entiendo este comment
 
 	public Generador(File texto, int limite) {
+
 		this.text=archivoATexto(texto);
 		this.limite=limite;
 	}
@@ -28,6 +29,8 @@ public abstract class Generador implements Graficable{
 
 	public void iniciar(){ //no tiene argumentos porque todo está en el estado, es el mismo metodo para generador 1 y generador 2, entonces se queda en la clase padre
 		llenarArreglo();
+		ordenarArreglo();
+		recortarArreglo();
 		determinarFontSizePorPalabra();
 		//ahora iniciar UI y acomodar todas las labels donde deben ir
 		Scene escena = crearNube();
@@ -49,15 +52,16 @@ public abstract class Generador implements Graficable{
 	}
 
 	public Scene crearNube() {
-		//crear UI y mostrarala como siempre y regresar la escena
+		//crear UI y mostrarala como siempre y regresar la escena con un grupo raiz vacio y ya
 	}
 
 	public void acomodarPalabras(Scene escena) {
-		//gran metodo donde se va acomodando la label de cada palabra del arreglo, para esto se usa el metodo setCoordenadas(int x, int y) de cada palabra y se saca la info con getX(), getY(), getwidth() y getHeight()
+		//gran metodo donde se va acomodando la label de cada palabra del arreglo evitando colisiones, para esto se usa el metodo setCoordenadas(int x, int y) de cada palabra y se saca la info con getX(), getY(), getwidth() y getHeight()
+		//checar colosiones en orden segun cuadrantes en coordenadas (I (++) ,II (-+), III(--), IV(+-)), iterar para cada radio del circulo
 
 	}
 
-	public int funcionCirculo(int x) { //recibe un valor x  regresa el valor (positivo?) correspondiente de la funcion x^2 + y^2 = r^2
+	public int funcionCirculo(int x, int r) { //recibe un valor x  regresa el valor (positivo?) correspondiente de la funcion x^2 + y^2 = r^2
 
 	}
 
@@ -85,7 +89,13 @@ public abstract class Generador implements Graficable{
 			}
 		}
 
+	}
 
+	public void recortarArreglo() { //reducir el arreglo según el limite, dejando las palabras más usadas
+		if (palabras.length>limite) {
+			//recortar arreglo
+			palabras  = Arrays.copyOf(palabras, limite);
+		}
 	}
 
 }

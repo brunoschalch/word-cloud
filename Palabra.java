@@ -38,13 +38,9 @@ public class Palabra {
 		return contenido;
 	}
 
-	public int getFrecuencia() {
-		return frecuencia;
-	}
+	public int getFrecuencia() { return frecuencia; }
 
-	public Label getLabel() {
-		return label;
-	}
+	public Label getLabel() { return label; }
 
 	public int getX() {	return x; }
 

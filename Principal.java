@@ -18,7 +18,7 @@ public class Principal extends Application implements EventHandler<ActionEvent>{
 
 	private GridPane pane;
 
-	public static void main(String... args){
+	public static void main(String[] args){
 		launch(args);
 	}
 
