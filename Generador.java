@@ -54,6 +54,10 @@ public abstract class Generador implements Graficable{
 
 	public Scene crearNube() {
 		//crear UI y mostrarala como siempre y regresar la escena con un grupo raiz vacio y ya
+		Group root = new Group();
+
+		Scene scene = new Scene(root, 1270, 720, Color.DEEPSKYBLUE); //cambiar después
+		return scene;
 	}
 
 	public void acomodarPalabras(Scene escena) {
@@ -111,7 +115,7 @@ public abstract class Generador implements Graficable{
 		//la colision ocurre cuando el rectangulo de la palabra actual coincide con el de alguna palabra, es decir, cuando el rango de x && de y de ambos rectangulos coincide para una o mas combinaciones de x && y
 
 		for (Palabra actual : palabras){
-			if (actual.getX()!=-2147483648 && actual.getY()!=-2147483648) { //si no se ha acomodado la palabra actual, no tiene sentido checar colisiones
+			if (actual.getX()!=-2147483648 && actual.getY()!=-2147483648) { //si no se ha acomodado la palabra actual (x o y == valor minimo de int), no tiene sentido checar colisiones
 				if (actual.getX() < x + w && x < actual.getX() + actual.getWidth() && actual.getY() < y + h) {
 					return true; //hubo colision
 				}
@@ -121,7 +125,7 @@ public abstract class Generador implements Graficable{
 
 	}
 
-	public int funcionCirculo(int x, int r) { //recibe un valor x  regresa el valor positivo correspondiente de la funcion x^2 + y^2 = r^2
+	public int funcionCirculo(int x, int r) { //recibe un valor x regresa el valor positivo correspondiente de la funcion x^2 + y^2 = r^2
 		return (int)Math.sqrt(r*r-x*x);
 	}
 

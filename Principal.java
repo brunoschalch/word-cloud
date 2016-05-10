@@ -35,7 +35,7 @@ public class Principal extends Application implements EventHandler<ActionEvent>{
 
       Group root = new Group();
 
-      Scene scene = new Scene(root, 700, 700, Color.DEEPSKYBLUE); //cambiar después
+      Scene scene = new Scene(root, 1280, 1000, Color.DEEPSKYBLUE); //cambiar después
       primaryStage.setScene(scene);
 
       pane = new GridPane();
