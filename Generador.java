@@ -62,11 +62,11 @@ public abstract class Generador implements Graficable{
 	}
 
 	public void acomodarPalabra(Palabra palabra, Scene escena) {
-		final int radioMax=500;
+
 		//checar colosiones primero para y positivos despues para negativos (cuadrantes II (-+), I (++), III(--), IV(+-)), iterar para cada radio del circulo
 		boolean acomodado=false;
 		//iterador de radio
-		for (int r=0; r<radioMax; r++) {
+		while (!acomodado) {
 
 
 			//empezar con cuadrantes II y I, probando todas las x entre 0 y |r|
@@ -98,9 +98,6 @@ public abstract class Generador implements Graficable{
 				}
 			}
 
-			if (acomodado) {
-				break; //ya no se tiene que seguir iterando por cada radio porque ya se acomodo
-			}
 
 		}
 	}
@@ -113,7 +110,7 @@ public abstract class Generador implements Graficable{
 		//la colision ocurre cuando el rectangulo de la palabra actual coincide con el de alguna palabra, es decir, cuando el rango de x && de y de ambos rectangulos coincide para una o mas combinaciones de x && y
 
 		for (Palabra actual : palabras){
-			if (actual.getX()!=-2147483648 && actual.getY()!=-2147483648)) {
+			if (actual.getX()!=-2147483648 && actual.getY()!=-2147483648)) { //si no se ha acomodado la palabra actual, no tiene sentido checar colisiones
 				if (actual.getX() < x + w && x < actual.getX() + actual.getWidth() && actual.getY() < y + h) {
 					return true; //hubo colision
 				} else {
