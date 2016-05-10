@@ -6,6 +6,7 @@ import javafx.stage.Stage;
 import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import java.util.Arrays;
 
 public abstract class Generador implements Graficable{
 
@@ -13,12 +14,12 @@ public abstract class Generador implements Graficable{
 	protected String texto;
 	protected int limite;
 	protected final int maxFontSize=150;
-	
+
 	//signos en variables -no entiendo este comment
 
 	public Generador(File texto, int limite) {
 
-		this.text=archivoATexto(texto);
+		this.texto=archivoATexto(texto);
 		this.limite=limite;
 	}
 
@@ -66,13 +67,13 @@ public abstract class Generador implements Graficable{
 		//checar colosiones primero para y positivos despues para negativos (cuadrantes II (-+), I (++), III(--), IV(+-)), iterar para cada radio del circulo
 		boolean acomodado=false;
 		//iterador de radio
-		while (!acomodado) {
+		for (int r=0; !acomodado; r++) {
 
 
 			//empezar con cuadrantes II y I, probando todas las x entre 0 y |r|
 			for (int x=-r ; x<=r ; x++) {
 				int y = funcionCirculo(x,r);
-				boolean colision = checarColision(palabra, x. y);
+				boolean colision = checarColision(palabra, x, y);
 				if (!colision) {
 					Label etiqueta = palabra.getLabel();
 					//agregar etiqueta a escena
@@ -86,7 +87,7 @@ public abstract class Generador implements Graficable{
 			if (!acomodado) { //solo tiene sentido intentar acomodarlo en cuadrantes III y IV si no se ha podido acomodar arriba
 				for (int x = -r; x <= r; x++) {
 					int y = -funcionCirculo(x, r);
-					boolean colision = checarColision(palabra, x.y);
+					boolean colision = checarColision(palabra, x, y);
 					if (!colision) {
 						Label etiqueta = palabra.getLabel();
 						//agregar etiqueta a escena
@@ -110,20 +111,18 @@ public abstract class Generador implements Graficable{
 		//la colision ocurre cuando el rectangulo de la palabra actual coincide con el de alguna palabra, es decir, cuando el rango de x && de y de ambos rectangulos coincide para una o mas combinaciones de x && y
 
 		for (Palabra actual : palabras){
-			if (actual.getX()!=-2147483648 && actual.getY()!=-2147483648)) { //si no se ha acomodado la palabra actual, no tiene sentido checar colisiones
+			if (actual.getX()!=-2147483648 && actual.getY()!=-2147483648) { //si no se ha acomodado la palabra actual, no tiene sentido checar colisiones
 				if (actual.getX() < x + w && x < actual.getX() + actual.getWidth() && actual.getY() < y + h) {
 					return true; //hubo colision
-				} else {
-					return false; //no hubo
 				}
 			}
 		}
-
+		return false;
 
 	}
 
 	public int funcionCirculo(int x, int r) { //recibe un valor x  regresa el valor positivo correspondiente de la funcion x^2 + y^2 = r^2
-		return Math.sqrt(r*r-x*x);
+		return (int)Math.sqrt(r*r-x*x);
 	}
 
 	public void agregarPalabra(String nuevaPalabra) {
@@ -135,7 +134,7 @@ public abstract class Generador implements Graficable{
 	public void ordenarArreglo() {
           // bubble sort! (ineficiente pero facil de programar)
 		int n = palabras.length;
-		Palabra temp = 0;
+		Palabra temp;
 
 		for(int i=0; i < n; i++){
 			for(int j=1; j > (n-i); j++){

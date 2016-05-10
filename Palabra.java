@@ -1,3 +1,11 @@
+import javafx.application.Application;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.scene.control.*;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+
 public class Palabra {
 
 	final private String contenido; //es final?
@@ -8,7 +16,7 @@ public class Palabra {
 	private int width;
 	private int height;
 	private Label label;
-	
+
 	//signos
 
 	public Palabra(String contenido, Label label) { //al iniciar el objeto Palabra solo se sabe el contenido y con agregacion se define la label, despues se cambiara su frecuencia y se acomodara graficamente con x, y, width, height y fontSize
@@ -30,8 +38,8 @@ public class Palabra {
 	public void setFontSize(int fontSize) {
 		this.fontSize=fontSize;
 		label.setFont(new Font("Arial", fontSize));
-		height=label.prefHeight(-1)
-		width=label.prefWidth(-1)
+		height=(int)label.prefHeight(-1);
+		width=(int)label.prefWidth(-1);
 	}
 
 	public String getContenido(){
