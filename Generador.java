@@ -56,13 +56,77 @@ public abstract class Generador implements Graficable{
 	}
 
 	public void acomodarPalabras(Scene escena) {
-		//gran metodo donde se va acomodando la label de cada palabra del arreglo evitando colisiones, para esto se usa el metodo setCoordenadas(int x, int y) de cada palabra y se saca la info con getX(), getY(), getwidth() y getHeight()
-		//checar colosiones en orden segun cuadrantes en coordenadas (I (++) ,II (-+), III(--), IV(+-)), iterar para cada radio del circulo
+		for (Palabra actual : palabras) {
+			acomodarPalabra(actual, escena);
+		}
+	}
+
+	public void acomodarPalabra(Palabra palabra, Scene escena) {
+		final int radioMax=500;
+		//checar colosiones primero para y positivos despues para negativos (cuadrantes II (-+), I (++), III(--), IV(+-)), iterar para cada radio del circulo
+		boolean acomodado=false;
+		//iterador de radio
+		for (int r=0; r<radioMax; r++) {
+
+
+			//empezar con cuadrantes II y I, probando todas las x entre 0 y |r|
+			for (int x=-r ; x<=r ; x++) {
+				int y = funcionCirculo(x,r);
+				boolean colision = checarColision(palabra, x. y);
+				if (!colision) {
+					Label etiqueta = palabra.getLabel();
+					//agregar etiqueta a escena
+					etiqueta.setTranslateX(x);
+					etiqueta.setTranslateY(y);
+					((Group)escena.getRoot()).getChildren().add(etiqueta);
+					acomodado=true; //ya se acomodo
+				}
+			}
+			//¿cuadrantes III y IV, probando todas las x entre 0 y |r|
+			if (!acomodado) { //solo tiene sentido intentar acomodarlo en cuadrantes III y IV si no se ha podido acomodar arriba
+				for (int x = -r; x <= r; x++) {
+					int y = -funcionCirculo(x, r);
+					boolean colision = checarColision(palabra, x.y);
+					if (!colision) {
+						Label etiqueta = palabra.getLabel();
+						//agregar etiqueta a escena
+						etiqueta.setTranslateX(x);
+						etiqueta.setTranslateY(y);
+						((Group)escena.getRoot()).getChildren().add(etiqueta);
+						acomodado=true; //ya se acomodo
+					}
+				}
+			}
+
+			if (acomodado) {
+				break; //ya no se tiene que seguir iterando por cada radio porque ya se acomodo
+			}
+
+		}
+	}
+
+	public boolean checarColision(Palabra palabra, int x, int y) {
+		//checar si no hay una superposicion de la palabra actual y alguna otra palabra en la posicion deseada
+		int w = palabra.getWidth();
+		int h = palabra.getHeight();
+		//importante, el centro de coordenadas de las labels es la esquina de arriba izquierda, tomar en cuenta
+		//la colision ocurre cuando el rectangulo de la palabra actual coincide con el de alguna palabra, es decir, cuando el rango de x && de y de ambos rectangulos coincide para una o mas combinaciones de x && y
+
+		for (Palabra actual : palabras){
+			if (actual.getX()!=-2147483648 && actual.getY()!=-2147483648)) {
+				if (actual.getX() < x + w && x < actual.getX() + actual.getWidth() && actual.getY() < y + h) {
+					return true; //hubo colision
+				} else {
+					return false; //no hubo
+				}
+			}
+		}
+
 
 	}
 
-	public int funcionCirculo(int x, int r) { //recibe un valor x  regresa el valor (positivo?) correspondiente de la funcion x^2 + y^2 = r^2
-
+	public int funcionCirculo(int x, int r) { //recibe un valor x  regresa el valor positivo correspondiente de la funcion x^2 + y^2 = r^2
+		return Math.sqrt(r*r-x*x);
 	}
 
 	public void agregarPalabra(String nuevaPalabra) {

@@ -2,8 +2,8 @@ public class Palabra {
 
 	final private String contenido; //es final?
 	private int frecuencia;
-	private int x;
-	private int y;
+	private int x=-2147483648; //este numero es la "señal" de que no se han determinado las coordenadas
+	private int y=-2147483648; //este numero es la "señal" de que no se han determinado las coordenadas
 	private int fontSize=10; //en pt on en px? por defecto 10
 	private int width;
 	private int height;

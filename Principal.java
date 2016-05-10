@@ -1,7 +1,7 @@
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.stage.Stage
+import javafx.stage.Stage;
 import javafx.scene.layout.GridPane;
 
 import javafx.scene.paint.Color;
@@ -60,7 +60,7 @@ public class Principal extends Application implements EventHandler<ActionEvent>{
     public void handle(ActionEvent e) {
 
 		    //al presionar el botón
-		    
+
 		    //Las cuentas de palabras deberán poderse guardar en un archivo
 		    //deberán poder indicar qué palabra fue la que más se contó y la que menos se contó.
 
