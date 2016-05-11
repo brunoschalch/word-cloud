@@ -113,15 +113,9 @@ public class Principal extends Application implements EventHandler<ActionEvent>{
         	ioe.printStackTrace;
         	System.out.println("No se encontro el archivo");
         }
-        try{
-        	File listaNegra = new File(nombreLN);
-        }
-        
-        catch(IOException ioe){
-        	ioe.printStackTrace;
-        	System.out.println("No se encontro el archivo");
-        }
-    	
+       
+        File listaNegra = new File(nombreLN);
+       
     
     	Generador g = null;
         //paso 1: crear objeto
