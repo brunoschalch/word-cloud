@@ -14,6 +14,7 @@ public class Generador2 extends Generador{
 	public Generador2(File texto, File listaNegra, int limite) {
 		super(texto, limite);
 		this.listaNegra=archivoAArreglo(listaNegra);
+
 	}
 
 
@@ -62,6 +63,7 @@ public class Generador2 extends Generador{
 
 	public String[] archivoAArreglo(File input) {
 		//falta este metodo
+		return new String[] {"a","b"};
 	}
 
 }
