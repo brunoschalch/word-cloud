@@ -1,8 +1,8 @@
+import java.io.*;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.scene.layout.GridPane;
 
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -16,63 +16,116 @@ import javafx.event.ActionEvent;
 
 public class Principal extends Application implements EventHandler<ActionEvent>{
 
-	private GridPane pane;
+	private TextField textoP, textoListaNegra, palabrasContar;
+	private Button generar;
+	private Label contMas, contMenos;
 
 	public static void main(String[] args){
 		launch(args);
 	}
 
 	@Override
-    public void start(Stage primaryStage) {
+    	public void start(Stage primaryStage) {
 
-        //dos archivos: principal y lista negra
+	Label wordCloudL, archivoPalabrasL, archivoListaL, numeroPalabrasL;
 
-        //Se le debe preguntar al usuario el máximo de palabras diferentes que el generador debe contar.
+      	Group root = new Group();
 
-        //http://static.mrfeinberg.com/bv_ch03.pdf
+      	Scene scene = new Scene(root, 1280, 1000, Color.WHITE);
+      	primaryStage.setScene(scene);
 
+      	wordCloudL = new Label("Nube");
+	archivoPalabrasL = new Label("Nombre del archivo principal");
+	archivoListaL = new Label("Nombre del archivo de las palabras que se ignoraran");
+	numeroPalabrasL = new Label("Numero de palabras diferentes que se contaran");
+      
+	textoP = new TextField();
+	textoListaNegra = new TextField();
+	palabrasContar = new TextField();
+      
+	generar = new Button("Generar");
+	generar.setOnAction(this);
+	        
+	contMas = new Label("La palabra que mas se conto fue: "); //cambiar
+	contMenos = new Label("La que menos se conto fue: ");
+	wordCloudL.setFont(Font.font("Arial",32));
+	archivoPalabrasL.setFont(Font.font("Arial",18));
+	archivoListaL.setFont(Font.font("Arial",18));
+	numeroPalabrasL.setFont(Font.font("Arial",18));
+	contMas.setFont(Font.font("Arial",18));
+	contMenos.setFont(Font.font("Arial",18));
+      
+	textoP.setPrefWidth(150);
+	textoListaNegra.setPrefWidth(150);
+	palabrasContar.setPrefWidth(50);
+	      
+	wordCloudL.setTranslateX(600);
+	wordCloudL.setTranslateY(30);
+	archivoPalabrasL.setTranslateX(100);
+	archivoPalabrasL.setTranslateY(100);
+	textoP.setTranslateX(100);
+	textoP.setTranslateY(130);
+	archivoListaL.setTranslateX(100);
+	archivoListaL.setTranslateY(180);
+	textoListaNegra.setTranslateX(100);
+	textoListaNegra.setTranslateY(210);
+	numeroPalabrasL.setTranslateX(100);
+	numeroPalabrasL.setTranslateY(260);
+	palabrasContar.setTranslateX(100);
+	palabrasContar.setTranslateY(290);
+	generar.setTranslateX(230);
+	generar.setTranslateY(350);
+	contMas.setTranslateX(100);
+	contMas.setTranslateY(520);
+	contMenos.setTranslateX(100);
+	contMenos.setTranslateY(580);
 
-      Label wordCloudL, archivoPalabrasL, archivoListaL, numeroPalabrasL;
-
-      Group root = new Group();
-
-      Scene scene = new Scene(root, 1280, 1000, Color.DEEPSKYBLUE); //cambiar después
-      primaryStage.setScene(scene);
-
-      pane = new GridPane();
-
-      wordCloudL = new Label("Nube");
-      archivoPalabrasL = new Label("Archivo principal");
-      archivoListaL = new Label("Archivo de palabras que se ignoraran");
-      numeroPalabrasL = new Label("Numero de palabras diferentes que se contaran"); //throw exception
-
-  		pane.add(archivoPalabrasL,0,1);
-  		pane.add(archivoListaL,1,1);
-  		pane.add(numeroPalabrasL,2,1);
-
-		  pane.setTranslateX(30);
-  		pane.setTranslateY(60);
-
-      root.getChildren().add(pane);
-
-  		primaryStage.show();
+	root.getChildren().add(wordCloudL);
+	root.getChildren().add(archivoPalabrasL);
+	root.getChildren().add(textoP);
+	root.getChildren().add(archivoListaL);
+	root.getChildren().add(textoListaNegra);
+	root.getChildren().add(numeroPalabrasL);
+	root.getChildren().add(palabrasContar);
+	root.getChildren().add(generar);
+	root.getChildren().add(contMas);
+	root.getChildren().add(contMenos);
+		
+  	primaryStage.show();
     }
 
     public void handle(ActionEvent e) {
 
-		    //al presionar el botón
+	String nombreP = textoP.getText()+".txt";
+    	String nombreLN = textoListaNegra.getText()+".txt";
+    	int lim = Integer.parseInt(limite.getText()); //checar si es un número con exceptions (pendiente)
+    	File texto = new File(nombreP); //? try y catch? o no son necesarios?
+    	File listaNegra = new File(nombreLN);
+    	Generador g = null;
+    	
+    	if(listaNegra.exists()){ //?
+    		g = new Generador1(texto, lim);
+    	}
+    	else{
+    		g = new Generador2(texto, listaNegra, lim);
+    	}
 
-        //paso 1: crear objeto
-
-        //paso 3: recibir escena con nube y mostrar en una nueva ventana
-        Stage stage = new Stage();
-        stage.setTitle("My New Stage Title");
-        stage.setScene(new Scene(root, 450, 450));
-        stage.show();
-
-
-		    //Las cuentas de palabras deberán poderse guardar en un archivo
-		    //deberán poder indicar qué palabra fue la que más se contó y la que menos se contó.
+    	g.iniciar();
+    	
+    	Palabra[] p = g.getPalabras();
+    	contMas.setText("La palabra que mas se conto fue: "+p[0].getContenido());
+    	contMas.setText("La que menos se conto fue: "+p[p.length].getContenido());
+    	
+    	try{
+		BufferedWriter writer = new BufferedWriter(new FileWriter("cuentas.txt"));
+		for(int i=0; i<p.length; i++){
+			writer.write(g[i].getContenido()+" "+g[i].getFrecuencia()+"/n");
+		}
+		writer.close();
+	}
+	catch(IOException ioe){
+		ioe.printStackTrace();
+	}
 
     }
 }
