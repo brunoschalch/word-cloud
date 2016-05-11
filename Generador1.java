@@ -9,8 +9,8 @@ import javafx.scene.text.Font;
 
 public class Generador1 extends Generador{
 
-	public Generador1(File texto int limite) {
-		super(File texto, int limite);
+	public Generador1(File texto, int limite) {
+		super(texto, limite);
 	}
 
 	@Override
