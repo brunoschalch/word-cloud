@@ -123,8 +123,8 @@ public class Principal extends Application implements EventHandler<ActionEvent>{
 
 
         Palabra[] p = g.getPalabras();
-    //	contMas.setText("La palabra que mas se conto fue: "+p[0].getContenido());
-    	//contMas.setText("La que menos se conto fue: "+p[p.length].getContenido());
+        contMas.setText("La palabra que mas se conto fue: "+p[0].getContenido());
+    	contMenos.setText("La que menos se conto fue: "+p[(p.length-1)].getContenido());
 
     	try{
 		BufferedWriter writer = new BufferedWriter(new FileWriter("cuentas.txt"));
