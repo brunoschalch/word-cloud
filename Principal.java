@@ -98,9 +98,31 @@ public class Principal extends Application implements EventHandler<ActionEvent>{
 
 	String nombreP = textoP.getText()+".txt";
     	String nombreLN = textoListaNegra.getText()+".txt";
-    	int lim = Integer.parseInt(palabrasContar.getText()); //checar si es un número con exceptions (pendiente)
-    	File texto = new File(nombreP); //? try y catch? o no son necesarios?
-    	File listaNegra = new File(nombreLN);
+    	try{
+    		int lim = Integer.parseInt(palabrasContar.getText()); //checar si es un número con exceptions (pendiente)
+    	}
+    	catch (NumberFormatException nfe){
+    		nfe.printStackTrace;
+        	System.out.println("Se requiere un numero entero");	
+    		
+    	}
+        try{
+        	File texto = new File(nombreP); 
+        }
+        catch(IOException ioe){
+        	ioe.printStackTrace;
+        	System.out.println("No se encontro el archivo");
+        }
+        try{
+        	File listaNegra = new File(nombreLN);
+        }
+        
+        catch(IOException ioe){
+        	ioe.printStackTrace;
+        	System.out.println("No se encontro el archivo");
+        }
+    	
+    
     	Generador g = null;
         //paso 1: crear objeto
     	if(listaNegra.exists()){ //?
@@ -117,19 +139,19 @@ public class Principal extends Application implements EventHandler<ActionEvent>{
         //paso 2: recibir escena con nube y mostrar en una nueva ventana
         Stage stage = new Stage();
         stage.setTitle("LA NUBE");
-        Scene contenido = g.iniciar();
+        Scene contenido = generador.iniciar();
         stage.setScene(contenido);
         stage.show();
 
 
         Palabra[] p = g.getPalabras();
-    //	contMas.setText("La palabra que mas se conto fue: "+p[0].getContenido());
-    	//contMas.setText("La que menos se conto fue: "+p[p.length].getContenido());
+    	contMas.setText("La palabra que mas se conto fue: "+p[0].getContenido());
+    	contMas.setText("La que menos se conto fue: "+p[p.length].getContenido());
 
     	try{
 		BufferedWriter writer = new BufferedWriter(new FileWriter("cuentas.txt"));
 		for(int i=0; i<p.length; i++){
-			writer.write(p[i].getContenido()+" "+p[i].getFrecuencia()+"/n");
+			writer.write(g[i].getContenido()+" "+g[i].getFrecuencia()+"/n");
 		}
 		writer.close();
 	}
