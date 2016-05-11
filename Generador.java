@@ -7,6 +7,7 @@ import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import java.util.Arrays;
+import java.nio.file.Files;
 
 public abstract class Generador implements Graficable{
 
@@ -24,6 +25,18 @@ public abstract class Generador implements Graficable{
 
 	public String archivoATexto(File input) {
 		//aqui se recibe el archivo y se regresa una string
+	
+                      try {
+                           return new String(Files.readAllBytes(input.toPath(),"UTF-8")); 
+                      } 
+                      catch (FileNotFoundException e) {
+                           e.printStackTrace();
+                      } 
+                      catch (IOException e) {
+                           e.printStackTrace();
+                      }
+                       return "";
+	            
 
 		try {
 			return new String(Files.readAllBytes(input.toPath(),"UTF-8"));
@@ -170,7 +183,5 @@ public abstract class Generador implements Graficable{
 			palabras  = Arrays.copyOf(palabras, limite);
 		}
 	}
-	
-	public Palabra[] getPalabras(){ return palabras;}
 
 }
