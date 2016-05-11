@@ -15,6 +15,8 @@ public abstract class Generador implements Graficable{
 	protected String texto;
 	protected int limite;
 	protected final int maxFontSize=150;
+	private final int WIDTH = 1280;
+	private final int HEIGHT = 1000;
 
 	//signos en variables -no entiendo este comment
 
@@ -69,13 +71,13 @@ public abstract class Generador implements Graficable{
 	public Scene crearNube() {
 		//crear UI y mostrarala como siempre y regresar la escena con un grupo raiz vacio y ya
 		Group root = new Group();
-		Scene scene = new Scene(root, 1280, 1000, Color.DEEPSKYBLUE); //cambiar después
+		Scene scene = new Scene(root, WIDTH, HEIGHT, Color.DEEPSKYBLUE); //cambiar después
 		return scene;
 	}
 
 	public void acomodarPalabras(Scene escena) {
 		for (Palabra actual : palabras) {
-			acomodarPalabra(actual, escena);
+			acomodarPalabra(palabras[0], escena);
 		}
 	}
 
@@ -90,12 +92,18 @@ public abstract class Generador implements Graficable{
 			//empezar con cuadrantes II y I, probando todas las x entre 0 y |r|
 			for (int x=-r ; x<=r ; x++) {
 				int y = funcionCirculo(x,r);
+				x=x+palabra.getWidth()/2;
+				y=y+palabra.getHeight()/2;
 				boolean colision = checarColision(palabra, x, y);
 				if (!colision) {
 					Label etiqueta = palabra.getLabel();
 					//agregar etiqueta a escena
-					etiqueta.setTranslateX(x);
-					etiqueta.setTranslateY(y);
+
+					//guardar coordenadas relativo a un centro de coordenadas 0|0
+					palabra.setCoordenadas(x, y);
+					etiqueta.setTranslateX(x+WIDTH/2);
+					etiqueta.setTranslateY(y+HEIGHT/2);
+					System.out.println("x es: " + x + " e y es: " +y);
 					((Group)escena.getRoot()).getChildren().add(etiqueta);
 					acomodado=true; //ya se acomodo
 				}
@@ -104,14 +112,20 @@ public abstract class Generador implements Graficable{
 			if (!acomodado) { //solo tiene sentido intentar acomodarlo en cuadrantes III y IV si no se ha podido acomodar arriba
 				for (int x = -r; x <= r; x++) {
 					int y = -funcionCirculo(x, r);
+					x=x+palabra.getWidth()/2;
+					y=y+palabra.getHeight()/2;
 					boolean colision = checarColision(palabra, x, y);
 					if (!colision) {
 						Label etiqueta = palabra.getLabel();
 						//agregar etiqueta a escena
-						etiqueta.setTranslateX(x);
-						etiqueta.setTranslateY(y);
+
+						//guardar coordenadas relativo a un centro de coordenadas 0|0 y en el centro de la palabra
+						palabra.setCoordenadas(x, y);
+						etiqueta.setTranslateX(x+WIDTH/2);
+						etiqueta.setTranslateY(y+HEIGHT/2);
 						((Group)escena.getRoot()).getChildren().add(etiqueta);
 						acomodado=true; //ya se acomodo
+						System.out.println("x es: " + x + " e y es: " +y);
 					}
 				}
 			}
@@ -122,14 +136,18 @@ public abstract class Generador implements Graficable{
 
 	public boolean checarColision(Palabra palabra, int x, int y) {
 		//checar si no hay una superposicion de la palabra actual y alguna otra palabra en la posicion deseada
-		int w = palabra.getWidth();
-		int h = palabra.getHeight();
+	//	int w = palabra.getWidth();
+	//	int h = palabra.getHeight();
 		//importante, el centro de coordenadas de las labels es la esquina de arriba izquierda, tomar en cuenta
 		//la colision ocurre cuando el rectangulo de la palabra actual coincide con el de alguna palabra, es decir, cuando el rango de x && de y de ambos rectangulos coincide para una o mas combinaciones de x && y
 
 		for (Palabra actual : palabras){
 			if (actual.getX()!=-2147483648 && actual.getY()!=-2147483648) { //si no se ha acomodado la palabra actual (x o y == valor minimo de int), no tiene sentido checar colisiones
-				if (actual.getX() < x + w && x < actual.getX() + actual.getWidth() && actual.getY() < y + h) {
+				//if (RectA.Left < RectB.Right && RectA.Right > RectB.Left && RectA.Top < RectB.Bottom && RectA.Bottom > RectB.Top )
+				System.out.println("no llega aqui"+actual.getWidth());
+				if (x-palabra.getWidth()/2 < actual.getX()+actual.getWidth()/2 && x+palabra.getWidth()/2 > actual.getX()-actual.getWidth()/2 &&
+						y+palabra.getHeight()/2 < actual.getY()-actual.getHeight()/2 && y-palabra.getHeight()/2> actual.getY()+actual.getHeight()/2 ) {
+
 					return true; //hubo colision
 				}
 			}

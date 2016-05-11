@@ -38,6 +38,7 @@ public class Generador2 extends Generador{
 						if (palabraActual.getContenido().equals(buscar)) {
 							yaExiste = true;
 							palabraActual.actualizarFrecuencia();
+							System.out.println("se actualizo"+ palabraActual.getContenido());
 						}
 					}
 					if (!yaExiste) {

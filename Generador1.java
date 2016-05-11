@@ -23,15 +23,19 @@ public class Generador1 extends Generador{
 			Label etiqueta = new Label(textoSeparado[0]);
 			palabras = new Palabra[1];
 			palabras[0] = new Palabra(textoSeparado[0], etiqueta);
+
 		}
 
 		for (int i=1; i<textoSeparado.length; i++) { //importante empezar en uno para no contar la primera palabra dos veces
+
 			String buscar= textoSeparado[i];
 			boolean yaExiste = false;
 			for (Palabra palabraActual : palabras) {
+
 				if (palabraActual.getContenido().equals(buscar)) {
 					yaExiste=true;
 					palabraActual.actualizarFrecuencia();
+
 				}
 			}
 			if (!yaExiste) {

@@ -5,6 +5,7 @@ import javafx.stage.Stage;
 import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import com.sun.javafx.tk.Toolkit;
 
 public class Palabra {
 
@@ -37,9 +38,11 @@ public class Palabra {
 
 	public void setFontSize(int fontSize) {
 		this.fontSize=fontSize;
-		label.setFont(new Font("Arial", fontSize));
-		height=(int)label.prefHeight(-1);
-		width=(int)label.prefWidth(-1);
+		Font fuente = new Font("Arial", fontSize);
+		label.setFont(fuente);
+		width = (int)com.sun.javafx.tk.Toolkit.getToolkit().getFontLoader().computeStringWidth(contenido, fuente);
+		height = (int)com.sun.javafx.tk.Toolkit.getToolkit().getFontLoader().getFontMetrics(new Font("Arial", fontSize)).getLineHeight();
+
 	}
 
 	public String getContenido(){
