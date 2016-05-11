@@ -161,5 +161,7 @@ public abstract class Generador implements Graficable{
 			palabras  = Arrays.copyOf(palabras, limite);
 		}
 	}
+	
+	public Palabra[] getPalabras(){ return palabras;}
 
 }
