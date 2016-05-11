@@ -18,13 +18,23 @@ public abstract class Generador implements Graficable{
 	//signos en variables -no entiendo este comment
 
 	public Generador(File texto, int limite) {
-
 		this.texto=archivoATexto(texto);
 		this.limite=limite;
 	}
 
 	public String archivoATexto(File input) {
 		//aqui se recibe el archivo y se regresa una string
+
+		try {
+			return new String(Files.readAllBytes(input.toPath(),"UTF-8"));
+		}
+		catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+		return "";
 
 	}
 
@@ -55,8 +65,7 @@ public abstract class Generador implements Graficable{
 	public Scene crearNube() {
 		//crear UI y mostrarala como siempre y regresar la escena con un grupo raiz vacio y ya
 		Group root = new Group();
-
-		Scene scene = new Scene(root, 1270, 720, Color.DEEPSKYBLUE); //cambiar después
+		Scene scene = new Scene(root, 1280, 1000, Color.DEEPSKYBLUE); //cambiar después
 		return scene;
 	}
 
