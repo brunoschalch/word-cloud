@@ -102,7 +102,7 @@ public class Principal extends Application implements EventHandler<ActionEvent>{
     	File texto = new File(nombreP); //? try y catch? o no son necesarios?
     	File listaNegra = new File(nombreLN);
     	Generador g = null;
-    	
+        //paso 1: crear objeto
     	if(listaNegra.exists()){ //?
     		g = new Generador1(texto, lim);
     	}
@@ -110,9 +110,19 @@ public class Principal extends Application implements EventHandler<ActionEvent>{
     		g = new Generador2(texto, listaNegra, lim);
     	}
 
-    	g.iniciar();
-    	
-    	Palabra[] p = g.getPalabras();
+
+
+
+
+        //paso 2: recibir escena con nube y mostrar en una nueva ventana
+        Stage stage = new Stage();
+        stage.setTitle("LA NUBE");
+        Scene contenido = generador.iniciar();
+        stage.setScene(contenido);
+        stage.show();
+
+
+        Palabra[] p = g.getPalabras();
     	contMas.setText("La palabra que mas se conto fue: "+p[0].getContenido());
     	contMas.setText("La que menos se conto fue: "+p[p.length].getContenido());
     	

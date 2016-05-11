@@ -38,7 +38,7 @@ public abstract class Generador implements Graficable{
 
 	}
 
-	public void iniciar(){ //no tiene argumentos porque todo está en el estado, es el mismo metodo para generador 1 y generador 2, entonces se queda en la clase padre
+	public Scene iniciar(){ //no tiene argumentos porque todo está en el estado, es el mismo metodo para generador 1 y generador 2, entonces se queda en la clase padre
 		llenarArreglo();
 		ordenarArreglo();
 		recortarArreglo();
@@ -46,7 +46,7 @@ public abstract class Generador implements Graficable{
 		//ahora iniciar UI y acomodar todas las labels donde deben ir
 		Scene escena = crearNube();
 		acomodarPalabras(escena);
-
+		return escena;
 	}
 
 	public abstract void llenarArreglo(); //el unico metodo que se queda abstracto es llenarArreglo porque uno tiene lista negra y el otro no
