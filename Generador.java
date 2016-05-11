@@ -40,6 +40,8 @@ public abstract class Generador implements Graficable{
 
 	}
 
+
+
 	public Scene iniciar(){ //no tiene argumentos porque todo está en el estado, es el mismo metodo para generador 1 y generador 2, entonces se queda en la clase padre
 		llenarArreglo();
 		ordenarArreglo();

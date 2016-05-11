@@ -1,12 +1,19 @@
 import java.io.*;
+import javafx.application.Application;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.scene.control.*;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 
 public class Generador2 extends Generador{
 	protected String[] listaNegra;
 
 
 	public Generador2(File texto, File listaNegra, int limite) {
-		super(File texto, int limite);
-		this.listaNegra=archivoATexto(listaNegra);
+		super(texto, limite);
+		this.listaNegra=archivoAArreglo(listaNegra);
 	}
 
 
@@ -41,7 +48,7 @@ public class Generador2 extends Generador{
 		}
 
 
-	}
+
 
 	public boolean checarListaNegra(String buscar) {
 		boolean coincidencia=false;
@@ -51,6 +58,10 @@ public class Generador2 extends Generador{
 			}
 		}
 		return coincidencia;
+	}
+
+	public String[] archivoAArreglo(File input) {
+		//falta este metodo
 	}
 
 }

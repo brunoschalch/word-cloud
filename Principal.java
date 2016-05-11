@@ -38,14 +38,14 @@ public class Principal extends Application implements EventHandler<ActionEvent>{
 	archivoPalabrasL = new Label("Nombre del archivo principal");
 	archivoListaL = new Label("Nombre del archivo de las palabras que se ignoraran");
 	numeroPalabrasL = new Label("Numero de palabras diferentes que se contaran");
-      
+
 	textoP = new TextField();
 	textoListaNegra = new TextField();
 	palabrasContar = new TextField();
-      
+
 	generar = new Button("Generar");
 	generar.setOnAction(this);
-	        
+
 	contMas = new Label("La palabra que mas se conto fue: "); //cambiar
 	contMenos = new Label("La que menos se conto fue: ");
 	wordCloudL.setFont(Font.font("Arial",32));
@@ -54,11 +54,11 @@ public class Principal extends Application implements EventHandler<ActionEvent>{
 	numeroPalabrasL.setFont(Font.font("Arial",18));
 	contMas.setFont(Font.font("Arial",18));
 	contMenos.setFont(Font.font("Arial",18));
-      
+
 	textoP.setPrefWidth(150);
 	textoListaNegra.setPrefWidth(150);
 	palabrasContar.setPrefWidth(50);
-	      
+
 	wordCloudL.setTranslateX(600);
 	wordCloudL.setTranslateY(30);
 	archivoPalabrasL.setTranslateX(100);
@@ -90,7 +90,7 @@ public class Principal extends Application implements EventHandler<ActionEvent>{
 	root.getChildren().add(generar);
 	root.getChildren().add(contMas);
 	root.getChildren().add(contMenos);
-		
+
   	primaryStage.show();
     }
 
@@ -98,7 +98,7 @@ public class Principal extends Application implements EventHandler<ActionEvent>{
 
 	String nombreP = textoP.getText()+".txt";
     	String nombreLN = textoListaNegra.getText()+".txt";
-    	int lim = Integer.parseInt(limite.getText()); //checar si es un número con exceptions (pendiente)
+    	int lim = Integer.parseInt(palabrasContar.getText()); //checar si es un número con exceptions (pendiente)
     	File texto = new File(nombreP); //? try y catch? o no son necesarios?
     	File listaNegra = new File(nombreLN);
     	Generador g = null;
@@ -125,7 +125,7 @@ public class Principal extends Application implements EventHandler<ActionEvent>{
         Palabra[] p = g.getPalabras();
     	contMas.setText("La palabra que mas se conto fue: "+p[0].getContenido());
     	contMas.setText("La que menos se conto fue: "+p[p.length].getContenido());
-    	
+
     	try{
 		BufferedWriter writer = new BufferedWriter(new FileWriter("cuentas.txt"));
 		for(int i=0; i<p.length; i++){
