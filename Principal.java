@@ -117,7 +117,7 @@ public class Principal extends Application implements EventHandler<ActionEvent>{
         //paso 2: recibir escena con nube y mostrar en una nueva ventana
         Stage stage = new Stage();
         stage.setTitle("LA NUBE");
-        Scene contenido = generador.iniciar();
+        Scene contenido = g.iniciar();
         stage.setScene(contenido);
         stage.show();
 
@@ -129,7 +129,7 @@ public class Principal extends Application implements EventHandler<ActionEvent>{
     	try{
 		BufferedWriter writer = new BufferedWriter(new FileWriter("cuentas.txt"));
 		for(int i=0; i<p.length; i++){
-			writer.write(g[i].getContenido()+" "+g[i].getFrecuencia()+"/n");
+			writer.write(p[i].getContenido()+" "+p[i].getFrecuencia()+"/n");
 		}
 		writer.close();
 	}
