@@ -64,6 +64,7 @@ public abstract class Generador implements Graficable{
 		//el tamaño debe ser proporcional al uso de cada palabra, todo relativo a maxFontSize con regla de 3, el arreglo palabras debe estar ordenado de mayor a menor frecuencia
 		for (Palabra palabra:palabras) {
 			palabra.setFontSize(palabra.getFrecuencia()*maxFontSize/frecuenciaMax);
+
 		}
 
 	}
@@ -76,8 +77,9 @@ public abstract class Generador implements Graficable{
 	}
 
 	public void acomodarPalabras(Scene escena) {
-		for (Palabra actual : palabras) {
-			acomodarPalabra(palabras[0], escena);
+		for (Palabra palabra : palabras) {
+			System.out.println("La palabra que se acomodara es "+palabra.getContenido()+", ancho: "+palabra.getWidth()+", alto: "+palabra.getHeight());
+			acomodarPalabra(palabra, escena);
 		}
 	}
 
@@ -167,6 +169,7 @@ public abstract class Generador implements Graficable{
 		Label etiqueta = new Label(nuevaPalabra);
 		palabras  = Arrays.copyOf(palabras, palabras.length + 1);
 		palabras[palabras.length - 1] = new Palabra(nuevaPalabra, etiqueta);
+
 	}
 
 	public void ordenarArreglo() {
