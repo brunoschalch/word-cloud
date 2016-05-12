@@ -93,10 +93,11 @@ public abstract class Generador implements Graficable{
 			//empezar con cuadrantes II y I, probando todas las x entre 0 y |r|
 			for (int x=-r ; x<=r && !acomodado; x++) {
 				int y = funcionCirculo(x,r);
-				x=x+palabra.getWidth()/2;
-				y=y+palabra.getHeight()/2;
+				x=x-palabra.getWidth()/2; //para centrar en el centro de la etiqueta y no en la esquina superior izqquerda
+				y=y-palabra.getHeight()/2;//para centrar en el centro de la etiqueta y no en la esquina superior izqquerda
 				boolean colision = checarColision(palabra, x, y);
-				System.out.println("loopsigue para "+palabra.getContenido());
+
+				System.out.println("Tratando de acomodar "+ palabra.getContenido() + "en coordenadas "+x +","+y );
 				if (!colision) {
 					Label etiqueta = palabra.getLabel();
 					//agregar etiqueta a escena
@@ -108,6 +109,7 @@ public abstract class Generador implements Graficable{
 					System.out.println("x es: " + x + " e y es: " +y);
 					((Group)escena.getRoot()).getChildren().add(etiqueta);
 					acomodado=true; //ya se acomodo
+					System.out.println("SE ACOMODO "+ palabra.getContenido() + "en coordenadas "+x +","+y );
 
 				}
 			}
@@ -115,10 +117,11 @@ public abstract class Generador implements Graficable{
 			//solo tiene sentido intentar acomodarlo en cuadrantes III y IV si no se ha podido acomodar arriba
 				for (int x = -r; x <= r && !acomodado; x++) {
 					int y = -funcionCirculo(x, r);
-					x=x+palabra.getWidth()/2;
-					y=y+palabra.getHeight()/2;
-					System.out.println("loopsiguepara "+palabra.getContenido());
+					x=x-palabra.getWidth()/2; //para centrar en el centro de la etiqueta y no en la esquina superior izqquerda
+					y=y-palabra.getHeight()/2; //para centrar en el centro de la etiqueta y no en la esquina superior izqquerda
 					boolean colision = checarColision(palabra, x, y);
+
+					System.out.println("Tratando de acomodar "+ palabra.getContenido() + "en coordenadas "+x +","+y );
 					if (!colision) {
 						Label etiqueta = palabra.getLabel();
 						//agregar etiqueta a escena
@@ -129,7 +132,7 @@ public abstract class Generador implements Graficable{
 						etiqueta.setTranslateY(y+HEIGHT/2);
 						((Group)escena.getRoot()).getChildren().add(etiqueta);
 						acomodado=true; //ya se acomodo
-						System.out.println("x es: " + x + " e y es: " +y);
+						System.out.println("SE ACOMODO "+ palabra.getContenido() + "en coordenadas "+x +","+y );
 
 					}
 				}
@@ -149,7 +152,7 @@ public abstract class Generador implements Graficable{
 		for (Palabra actual : palabras){
 			if (actual.getX()!=-2147483648 && actual.getY()!=-2147483648) { //si no se ha acomodado la palabra actual (x o y == valor minimo de int), no tiene sentido checar colisiones
 				//if (RectA.Left < RectB.Right && RectA.Right > RectB.Left && RectA.Top < RectB.Bottom && RectA.Bottom > RectB.Top )
-				System.out.println("no llega aqui"+actual.getWidth());
+
 				if (x-palabra.getWidth()/2 < actual.getX()+actual.getWidth()/2 && x+palabra.getWidth()/2 > actual.getX()-actual.getWidth()/2 &&
 						y+palabra.getHeight()/2 < actual.getY()-actual.getHeight()/2 && y-palabra.getHeight()/2> actual.getY()+actual.getHeight()/2 ) {
 
