@@ -146,12 +146,21 @@ public class Principal extends Application implements EventHandler<ActionEvent>{
 
         //paso 1: crear objeto
 
-    	if(listaNegra!=null && listaNegra.exists()){
-    		g = new Generador1(texto, lim);
-    	}
-    	else{
-    		g = new Generador2(texto, listaNegra, lim);
-    	}
+    	if(texto!=null && texto.exists()){
+        
+        	if(listaNegra!=null && listaNegra.exists()){
+        		g = new Generador2(texto, listaNegra, lim);
+        	}
+        	else{
+        		g = new Generador1(texto, lim);
+        	}
+        }
+        else{
+        	//opciones
+        	Alert alert2 = new Alert(AlertType.ERROR, "No se encontro tu archivo principal");
+        	alert2.showAndWait();
+        	throw new NullPointerException("No se encontro tu archivo principal");
+        }
 
         //paso 2: recibir escena con nube y mostrar en una nueva ventana
         Stage stage = new Stage();
