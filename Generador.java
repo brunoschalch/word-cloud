@@ -154,8 +154,7 @@ public abstract class Generador implements Graficable{
 			if (actual.getX()!=-2147483648 && actual.getY()!=-2147483648) { //si no se ha acomodado la palabra actual (x o y == valor minimo de int), no tiene sentido checar colisiones
 				//if (RectA.Left < RectB.Right && RectA.Right > RectB.Left && RectA.Top < RectB.Bottom && RectA.Bottom > RectB.Top )
 
-			//	if (x-palabra.getWidth()/2 < actual.getX()+actual.getWidth()/2 && x+palabra.getWidth()/2 > actual.getX()-actual.getWidth()/2 &&
-			//			y+palabra.getHeight()/2 < actual.getY()-actual.getHeight()/2 && y-palabra.getHeight()/2> actual.getY()+actual.getHeight()/2 ) {
+
 			if (!(x+palabra.getWidth()/2 < actual.getX()-actual.getWidth()/2 || x-palabra.getWidth()/2 > actual.getX()+actual.getWidth()/2 || y+palabra.getHeight()/2 < actual.getY()-actual.getHeight()/2 ||
 					y-palabra.getHeight()/2 > actual.getY()+actual.getHeight()/2)) {
 					return true; //hubo colision
