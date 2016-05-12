@@ -42,7 +42,8 @@ public class Palabra {
 		label.setFont(fuente);
 		width = (int)com.sun.javafx.tk.Toolkit.getToolkit().getFontLoader().computeStringWidth(contenido, fuente);
 		height = (int)com.sun.javafx.tk.Toolkit.getToolkit().getFontLoader().getFontMetrics(new Font("Arial", fontSize)).getLineHeight();
-
+		width*=1.6; //con esto las palabras se enciman menos, sintoma de que las dos lineas de arriba algo mal tienen
+		height*=1.2;//con esto las palabras se enciman menos, sintoma de que las dos lineas de arriba algo mal tienen
 	}
 
 	public String getContenido(){

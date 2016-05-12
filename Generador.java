@@ -97,7 +97,7 @@ public abstract class Generador implements Graficable{
 				int coordY=y-palabra.getHeight()/2;//para centrar en el centro de la etiqueta y no en la esquina superior izqquerda
 				boolean colision = checarColision(palabra, coordX, coordY);
 
-				System.out.println("Tratando de acomodar "+ palabra.getContenido() + "en coordenadas "+coordX +","+coordY );
+			//	System.out.println("Tratando de acomodar "+ palabra.getContenido() + "en coordenadas "+coordX +","+coordY );
 				if (!colision) {
 					Label etiqueta = palabra.getLabel();
 					//agregar etiqueta a escena
@@ -121,7 +121,7 @@ public abstract class Generador implements Graficable{
 					int coordY=y-palabra.getHeight()/2;//para centrar en el centro de la etiqueta y no en la esquina superior izqquerda
 					boolean colision = checarColision(palabra, coordX, coordY);
 
-					System.out.println("Tratando de acomodar "+ palabra.getContenido() + "en coordenadas "+coordX +","+coordY );
+				//	System.out.println("Tratando de acomodar "+ palabra.getContenido() + "en coordenadas "+coordX +","+coordY );
 					if (!colision) {
 						Label etiqueta = palabra.getLabel();
 						//agregar etiqueta a escena
@@ -174,6 +174,7 @@ public abstract class Generador implements Graficable{
 		palabras  = Arrays.copyOf(palabras, palabras.length + 1);
 		palabras[palabras.length - 1] = new Palabra(nuevaPalabra, etiqueta);
 
+
 	}
 
 	public void ordenarArreglo() {
@@ -182,9 +183,9 @@ public abstract class Generador implements Graficable{
 		Palabra temp;
 
 		for(int i=0; i < n; i++){
-			for(int j=1; j > (n-i); j++){
+			for(int j=1; j < (n-i); j++){
 
-				if(palabras[j-1].getFrecuencia() > palabras[j].getFrecuencia()){
+				if(palabras[j-1].getFrecuencia() < palabras[j].getFrecuencia()){
 					//hacer el cambio
 					temp = palabras[j-1];
 					palabras[j-1] = palabras[j];
@@ -192,6 +193,10 @@ public abstract class Generador implements Graficable{
 				}
 
 			}
+		}
+
+		for (Palabra esta: palabras) {
+			System.out.println("El arreglo se ordeno asi: "+ esta.getContenido()+ " frecuencia: "+ esta.getFrecuencia());
 		}
 
 	}
