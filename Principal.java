@@ -145,7 +145,8 @@ public class Principal extends Application implements EventHandler<ActionEvent>{
     	Generador g = null;
 
         //paso 1: crear objeto
-    	if(listaNegra.exists()){
+
+    	if(listaNegra!=null && listaNegra.exists()){
     		g = new Generador1(texto, lim);
     	}
     	else{
