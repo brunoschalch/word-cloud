@@ -49,6 +49,8 @@ public class Palabra {
 		width*=1.5; //con esto las palabras se enciman menos, sintoma de que las dos lineas de arriba algo mal tienen
 		height*=1.2;//con esto las palabras se enciman menos, sintoma de que las dos lineas de arriba algo mal tienen
 
+
+
 	}
 
 	public String getContenido(){

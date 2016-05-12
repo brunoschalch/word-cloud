@@ -49,7 +49,7 @@ public abstract class Generador implements Graficable{
 		ordenarArreglo();
 		recortarArreglo();
 		determinarFontSizePorPalabra();
-		//determinarTonoPorPalabra();
+		determinarTonoPorPalabra();
 		//ahora iniciar UI y acomodar todas las labels donde deben ir
 		Scene escena = crearNube();
 		acomodarPalabras(escena);
@@ -76,8 +76,8 @@ public abstract class Generador implements Graficable{
 		//experimental
 		for (int i=0; i<cantidadPalabras; i++) {
 			float transparencia = i/cantidadPalabras;
-			if (transparencia<0.2) transparencia=0.2f;
-			palabras[i].getLabel().setTextFill( Color.hsb(270,1.0,transparencia));
+			if (transparencia<0.1) transparencia=0.1f;
+			palabras[i].getLabel().setTextFill( Color.hsb(270,0,0.1));
 		}
 	}
 
@@ -118,7 +118,6 @@ public abstract class Generador implements Graficable{
 					palabra.setCoordenadas(coordX, coordY);
 					etiqueta.setTranslateX(coordX+WIDTH/2);
 					etiqueta.setTranslateY(coordY+HEIGHT/2);
-					System.out.println("x es: " + coordX + " e y es: " +coordY);
 					((Group)escena.getRoot()).getChildren().add(etiqueta);
 					acomodado=true; //ya se acomodo
 					System.out.println("SE ACOMODO "+ palabra.getContenido() + "en coordenadas "+coordX +","+coordY );
@@ -137,12 +136,10 @@ public abstract class Generador implements Graficable{
 					if (!colision) {
 						Label etiqueta = palabra.getLabel();
 						//agregar etiqueta a escena
-
 						//guardar coordenadas relativo a un centro de coordenadas 0|0 y en el centro de la palabra
 						palabra.setCoordenadas(coordX, coordY);
 						etiqueta.setTranslateX(coordX+WIDTH/2);
 						etiqueta.setTranslateY(coordY+HEIGHT/2);
-						System.out.println("x es: " + coordX + " e y es: " +coordY);
 						((Group)escena.getRoot()).getChildren().add(etiqueta);
 						acomodado=true; //ya se acomodo
 						System.out.println("SE ACOMODO "+ palabra.getContenido() + "en coordenadas "+coordX +","+coordY );
@@ -178,7 +175,7 @@ public abstract class Generador implements Graficable{
 	}
 
 	public int funcionCirculo(int x, int r) { //recibe un valor x regresa el valor positivo correspondiente de la funcion x^2 + y^2 = r^2
-		return (int)Math.sqrt(r*r-x*x);
+		return (int) Math.round(Math.sqrt(r*r-x*x));
 	}
 
 	public void agregarPalabra(String nuevaPalabra) {
