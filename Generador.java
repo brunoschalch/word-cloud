@@ -88,13 +88,13 @@ public abstract class Generador implements Graficable{
 		//iterador de radio
 		for (int r=0; !acomodado; r++) {
 
-
 			//empezar con cuadrantes II y I, probando todas las x entre 0 y |r|
-			for (int x=-r ; x<=r ; x++) {
+			for (int x=-r ; x<=r && !acomodado; x++) {
 				int y = funcionCirculo(x,r);
 				x=x+palabra.getWidth()/2;
 				y=y+palabra.getHeight()/2;
 				boolean colision = checarColision(palabra, x, y);
+				System.out.println("loopsigue para "+palabra.getContenido());
 				if (!colision) {
 					Label etiqueta = palabra.getLabel();
 					//agregar etiqueta a escena
@@ -106,14 +106,16 @@ public abstract class Generador implements Graficable{
 					System.out.println("x es: " + x + " e y es: " +y);
 					((Group)escena.getRoot()).getChildren().add(etiqueta);
 					acomodado=true; //ya se acomodo
+
 				}
 			}
 			//¿cuadrantes III y IV, probando todas las x entre 0 y |r|
-			if (!acomodado) { //solo tiene sentido intentar acomodarlo en cuadrantes III y IV si no se ha podido acomodar arriba
-				for (int x = -r; x <= r; x++) {
+			//solo tiene sentido intentar acomodarlo en cuadrantes III y IV si no se ha podido acomodar arriba
+				for (int x = -r; x <= r && !acomodado; x++) {
 					int y = -funcionCirculo(x, r);
 					x=x+palabra.getWidth()/2;
 					y=y+palabra.getHeight()/2;
+					System.out.println("loopsiguepara "+palabra.getContenido());
 					boolean colision = checarColision(palabra, x, y);
 					if (!colision) {
 						Label etiqueta = palabra.getLabel();
@@ -126,9 +128,10 @@ public abstract class Generador implements Graficable{
 						((Group)escena.getRoot()).getChildren().add(etiqueta);
 						acomodado=true; //ya se acomodo
 						System.out.println("x es: " + x + " e y es: " +y);
+
 					}
 				}
-			}
+
 
 
 		}

@@ -17,12 +17,12 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.event.EventHandler;
 import javafx.event.ActionEvent;
 
-public class Principal2 extends Application implements EventHandler<ActionEvent>{
+public class Principal extends Application implements EventHandler<ActionEvent>{
 
 	private TextField palabrasContar;
 	private Button buscarP, buscarList, generar;
 	private Label contMas, contMenos;
-	private File texto, listaNegra; 
+	private File texto, listaNegra;
 
 	public static void main(String[] args){
 		launch(args);
@@ -36,14 +36,14 @@ public class Principal2 extends Application implements EventHandler<ActionEvent>
 	      	Group root = new Group();
 	      	Scene scene = new Scene(root, 550, 500, Color.WHITE);
 	      	primaryStage.setScene(scene);
-	
+
 	      	nubeL = new Label("Nube");
 		archivoPalabrasL = new Label("Archivo principal");
 		archivoListaL = new Label("'Lista Negra'");
 		numeroPalabrasL = new Label("Numero de palabras diferentes que se contaran");
 		respuestaP = new Label();
 		respuestaL = new Label();
-		
+
 		FileChooser fileChooser = new FileChooser();
 		texto = null;
 		listaNegra = null;
@@ -58,7 +58,7 @@ public class Principal2 extends Application implements EventHandler<ActionEvent>
                     			respuestaP.setTextFill(Color.DARKGRAY);
 				}
             		});
-		
+
 		buscarList = new Button("Buscar");
 		buscarList.setOnAction(
 			new EventHandler<ActionEvent>(){
@@ -69,7 +69,7 @@ public class Principal2 extends Application implements EventHandler<ActionEvent>
 		                    	respuestaL.setTextFill(Color.DARKGRAY);
 				}
             		});
-		
+
 		palabrasContar = new TextField();
 
 		generar = new Button("Generar");
@@ -77,7 +77,7 @@ public class Principal2 extends Application implements EventHandler<ActionEvent>
 
 		contMas = new Label();
 		contMenos = new Label();
-	
+
 		nubeL.setFont(Font.font("Arial",32));
 		archivoPalabrasL.setFont(Font.font("Arial",18));
 		respuestaP.setFont(Font.font("Arial",18));
@@ -131,9 +131,9 @@ public class Principal2 extends Application implements EventHandler<ActionEvent>
     }
 
     public void handle(ActionEvent e) {
-    	
+
     	int lim = 0;
-    
+
     	try{
     		lim = Integer.parseInt(palabrasContar.getText());
     	}
@@ -141,9 +141,9 @@ public class Principal2 extends Application implements EventHandler<ActionEvent>
     		Alert alert1 = new Alert(AlertType.ERROR, "Por favor, ingresa un numero");
 	    	alert1.showAndWait();
     	}
-    	
+
     	Generador g = null;
-    	
+
         //paso 1: crear objeto
     	if(listaNegra.exists()){
     		g = new Generador1(texto, lim);
