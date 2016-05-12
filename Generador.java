@@ -158,21 +158,34 @@ public abstract class Generador implements Graficable{
 	//	int h = palabra.getHeight();
 		//importante, el centro de coordenadas de las labels es la esquina de arriba izquierda, tomar en cuenta
 		//la colision ocurre cuando el rectangulo de la palabra actual coincide con el de alguna palabra, es decir, cuando el rango de x && de y de ambos rectangulos coincide para una o mas combinaciones de x && y
+		int aIzq= x-(palabra.getWidth()/2);
+		int aDer=x+(palabra.getWidth()/2); //CREO que aaqui esta el problema somehow
+		int aAbajo= y-(palabra.getHeight()/2);
+		int aArriba= y+(palabra.getHeight()/2);
+
 
 		for (Palabra actual : palabras){
+			int bIzq= actual.getX()-actual.getWidth()/2;
+			int bDer= actual.getX()+actual.getWidth()/2;
+			int bAbajo= actual.getY()-actual.getHeight()/2;
+			int bArriba= actual.getY()+actual.getHeight()/2;
+
 			if (actual.getX()!=-2147483648 && actual.getY()!=-2147483648) { //si no se ha acomodado la palabra actual (x o y == valor minimo de int), no tiene sentido checar colisiones
-				//if (RectA.Left < RectB.Right && RectA.Right > RectB.Left && RectA.Top < RectB.Bottom && RectA.Bottom > RectB.Top )
-
-
-			if (!(x+palabra.getWidth()/2 < actual.getX()-actual.getWidth()/2 || x-palabra.getWidth()/2 > actual.getX()+actual.getWidth()/2 || y+palabra.getHeight()/2 < actual.getY()-actual.getHeight()/2 ||
-					y-palabra.getHeight()/2 > actual.getY()+actual.getHeight()/2)) {
+				if (!(aDer < bIzq || aIzq > bDer || aArriba < bAbajo || aAbajo > bArriba)) { //rectangulo b tiene que estar arriba o abajo o a la derecha o a la izquiera de rectangulo b. si no esta ahi es sobreposicion
 					return true; //hubo colision
 				}
 			}
 		}
-		return false;
+		System.out.println("En colosion, ancho:"+palabra.getWidth()+" alto: "+palabra.getHeight());
 
+		return false;
 	}
+
+
+
+
+
+
 
 	public int funcionCirculo(int x, int r) { //recibe un valor x regresa el valor positivo correspondiente de la funcion x^2 + y^2 = r^2
 		return (int) Math.round(Math.sqrt(r*r-x*x));
