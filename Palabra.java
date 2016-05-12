@@ -6,6 +6,8 @@ import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import com.sun.javafx.tk.Toolkit;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
 
 public class Palabra {
 
@@ -40,10 +42,13 @@ public class Palabra {
 		this.fontSize=fontSize;
 		Font fuente = new Font("Arial", fontSize);
 		label.setFont(fuente);
+
+
 		width = (int)com.sun.javafx.tk.Toolkit.getToolkit().getFontLoader().computeStringWidth(contenido, fuente);
-		height = (int)com.sun.javafx.tk.Toolkit.getToolkit().getFontLoader().getFontMetrics(new Font("Arial", fontSize)).getLineHeight();
-		width*=1.6; //con esto las palabras se enciman menos, sintoma de que las dos lineas de arriba algo mal tienen
+		height = (int)com.sun.javafx.tk.Toolkit.getToolkit().getFontLoader().getFontMetrics(fuente).getLineHeight();
+		width*=1.5; //con esto las palabras se enciman menos, sintoma de que las dos lineas de arriba algo mal tienen
 		height*=1.2;//con esto las palabras se enciman menos, sintoma de que las dos lineas de arriba algo mal tienen
+
 	}
 
 	public String getContenido(){

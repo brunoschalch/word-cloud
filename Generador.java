@@ -49,6 +49,7 @@ public abstract class Generador implements Graficable{
 		ordenarArreglo();
 		recortarArreglo();
 		determinarFontSizePorPalabra();
+		//determinarTonoPorPalabra();
 		//ahora iniciar UI y acomodar todas las labels donde deben ir
 		Scene escena = crearNube();
 		acomodarPalabras(escena);
@@ -59,7 +60,7 @@ public abstract class Generador implements Graficable{
 
 	public void determinarFontSizePorPalabra() {
 		//este metodo usa el arreglo palabras y basado en la frecuencia de cada palabra y la cantidad de palabras determina el tamaño de cada una, se manda llamar despues de iniciar el arreglo
-		int cantidadPalabras=0;
+
 		int frecuenciaMax=palabras[0].getFrecuencia();
 		//el tamaño debe ser proporcional al uso de cada palabra, todo relativo a maxFontSize con regla de 3, el arreglo palabras debe estar ordenado de mayor a menor frecuencia
 		for (Palabra palabra:palabras) {
@@ -67,6 +68,17 @@ public abstract class Generador implements Graficable{
 
 		}
 
+	}
+
+	public void determinarTonoPorPalabra() {
+		int cantidadPalabras=palabras.length;
+
+		//experimental
+		for (int i=0; i<cantidadPalabras; i++) {
+			float transparencia = i/cantidadPalabras;
+			if (transparencia<0.2) transparencia=0.2f;
+			palabras[i].getLabel().setTextFill( Color.hsb(270,1.0,transparencia));
+		}
 	}
 
 	public Scene crearNube() {
