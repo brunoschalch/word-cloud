@@ -8,6 +8,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import java.util.Arrays;
 import java.nio.file.Files;
+import javafx.scene.shape.*;
 
 public abstract class Generador implements Graficable{
 
@@ -104,9 +105,11 @@ public abstract class Generador implements Graficable{
 
 			//empezar con cuadrantes II y I, probando todas las x entre 0 y |r|
 			for (int x=-r ; x<=r && !acomodado; x++) {
+
 				int y = funcionCirculo(x,r);
 				int coordX=x-palabra.getWidth()/2; //para centrar en el centro de la etiqueta y no en la esquina superior izqquerda
 				int coordY=y-palabra.getHeight()/2;//para centrar en el centro de la etiqueta y no en la esquina superior izqquerda
+
 				boolean colision = checarColision(palabra, coordX, coordY);
 
 			//	System.out.println("Tratando de acomodar "+ palabra.getContenido() + "en coordenadas "+coordX +","+coordY );
@@ -118,6 +121,17 @@ public abstract class Generador implements Graficable{
 					palabra.setCoordenadas(coordX, coordY);
 					etiqueta.setTranslateX(coordX+WIDTH/2);
 					etiqueta.setTranslateY(coordY+HEIGHT/2);
+
+				/*						usado para debuggear
+						Rectangle rect1 = RectangleBuilder.create()
+								.x(coordX+WIDTH/2)
+								.y(coordY+HEIGHT/2)
+								.width(palabra.getWidth())
+								.height(palabra.getHeight())
+								.build();
+						((Group)escena.getRoot()).getChildren().add(rect1);
+						*/
+
 					((Group)escena.getRoot()).getChildren().add(etiqueta);
 					acomodado=true; //ya se acomodo
 					System.out.println("SE ACOMODO "+ palabra.getContenido() + "en coordenadas "+coordX +","+coordY );
@@ -127,7 +141,8 @@ public abstract class Generador implements Graficable{
 			//¿cuadrantes III y IV, probando todas las x entre 0 y |r|
 			//solo tiene sentido intentar acomodarlo en cuadrantes III y IV si no se ha podido acomodar arriba
 				for (int x = -r; x <= r && !acomodado; x++) {
-					int y = -funcionCirculo(x, r);
+
+					int y = -funcionCirculo(x,r);
 					int coordX=x-palabra.getWidth()/2; //para centrar en el centro de la etiqueta y no en la esquina superior izqquerda
 					int coordY=y-palabra.getHeight()/2;//para centrar en el centro de la etiqueta y no en la esquina superior izqquerda
 					boolean colision = checarColision(palabra, coordX, coordY);
@@ -140,7 +155,18 @@ public abstract class Generador implements Graficable{
 						palabra.setCoordenadas(coordX, coordY);
 						etiqueta.setTranslateX(coordX+WIDTH/2);
 						etiqueta.setTranslateY(coordY+HEIGHT/2);
+/*						usado para debuggear
+						Rectangle rect1 = RectangleBuilder.create()
+								.x(coordX+WIDTH/2)
+								.y(coordY+HEIGHT/2)
+								.width(palabra.getWidth())
+								.height(palabra.getHeight())
+								.build();
+						((Group)escena.getRoot()).getChildren().add(rect1);
+						*/
+
 						((Group)escena.getRoot()).getChildren().add(etiqueta);
+
 						acomodado=true; //ya se acomodo
 						System.out.println("SE ACOMODO "+ palabra.getContenido() + "en coordenadas "+coordX +","+coordY );
 
@@ -158,17 +184,17 @@ public abstract class Generador implements Graficable{
 	//	int h = palabra.getHeight();
 		//importante, el centro de coordenadas de las labels es la esquina de arriba izquierda, tomar en cuenta
 		//la colision ocurre cuando el rectangulo de la palabra actual coincide con el de alguna palabra, es decir, cuando el rango de x && de y de ambos rectangulos coincide para una o mas combinaciones de x && y
-		int aIzq= x-(palabra.getWidth()/2);
-		int aDer=x+(palabra.getWidth()/2); //CREO que aaqui esta el problema somehow
-		int aAbajo= y-(palabra.getHeight()/2);
-		int aArriba= y+(palabra.getHeight()/2);
+		int aIzq= x;
+		int aDer=x+(palabra.getWidth()); //CREO que aaqui esta el problema somehow
+		int aAbajo= y;
+		int aArriba= y+(palabra.getHeight());
 
 
 		for (Palabra actual : palabras){
-			int bIzq= actual.getX()-actual.getWidth()/2;
-			int bDer= actual.getX()+actual.getWidth()/2;
-			int bAbajo= actual.getY()-actual.getHeight()/2;
-			int bArriba= actual.getY()+actual.getHeight()/2;
+			int bIzq= actual.getX();
+			int bDer= actual.getX()+actual.getWidth();
+			int bAbajo= actual.getY();
+			int bArriba= actual.getY()+actual.getHeight();
 
 			if (actual.getX()!=-2147483648 && actual.getY()!=-2147483648) { //si no se ha acomodado la palabra actual (x o y == valor minimo de int), no tiene sentido checar colisiones
 				if (!(aDer < bIzq || aIzq > bDer || aArriba < bAbajo || aAbajo > bArriba)) { //rectangulo b tiene que estar arriba o abajo o a la derecha o a la izquiera de rectangulo b. si no esta ahi es sobreposicion

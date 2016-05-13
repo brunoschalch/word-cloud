@@ -46,17 +46,9 @@ public class Palabra {
 		Font fuente = new Font("Consolas", fontSize);
 		label.setFont(fuente);
 
-	//	Bounds bounds = TextBuilder.create().text(contenido).font(fuente).build().getLayoutBounds();
-	//	width=(int) bounds.getWidth();
-	//	height=(int) bounds.getHeight();
+		width = (int)com.sun.javafx.tk.Toolkit.getToolkit().getFontLoader().computeStringWidth(contenido, fuente);
+		height = (int)com.sun.javafx.tk.Toolkit.getToolkit().getFontLoader().getFontMetrics(fuente).getLineHeight();
 
-		//width = (int)com.sun.javafx.tk.Toolkit.getToolkit().getFontLoader().computeStringWidth(contenido, fuente);
-		//height = (int)com.sun.javafx.tk.Toolkit.getToolkit().getFontLoader().getFontMetrics(fuente).getLineHeight();
-		//	width*=1+(0.1*contenido.length()); //con esto las palabras se enciman menos, sintoma de que las dos lineas de arriba algo mal tienen
-		//height*=1.1;//con esto las palabras se enciman menos, sintoma de que las dos lineas de arriba algo mal tienen
-		width=(fontSize/2)*contenido.length();
-		width*=1.3;
-		height=fontSize;
 
 
 	}
