@@ -1,10 +1,11 @@
 import java.io.*;
 import javafx.scene.control.*;
+import javafx.scene.paint.Color;
 
 public class Generador1 extends Generador{
 
-	public Generador1(File texto, int limite) {
-		super(texto, limite);
+	public Generador1(File texto, int limite, Color colorPalabra, Color colorFondo) {
+		super(texto, limite, colorPalabra, colorFondo);
 	}
 
 	@Override

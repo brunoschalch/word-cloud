@@ -1,12 +1,13 @@
 import java.io.*;
 import javafx.scene.control.*;
+import javafx.scene.paint.Color;
 
 public class Generador2 extends Generador{
 	protected String[] listaNegra;
 
 
-	public Generador2(File texto, File listaNegra, int limite) {
-		super(texto, limite);
+	public Generador2(File texto, File listaNegra, int limite, Color colorPalabra, Color colorFondo) {
+		super(texto, limite, colorPalabra, colorFondo);
 		this.listaNegra=archivoAArreglo(listaNegra);
 
 	}

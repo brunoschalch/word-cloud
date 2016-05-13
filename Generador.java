@@ -17,14 +17,19 @@ public abstract class Generador implements Graficable{
 	protected int limite;
 	protected final int maxFontSize=220;
 	protected final int minFontSize=28;
+	protected Color colorPalabra;
+	protected Color colorFondo;
 	private final int WIDTH = 1280;
 	private final int HEIGHT = 1000;
 
+
 	//signos en variables -no entiendo este comment
 
-	public Generador(File texto, int limite) {
+	public Generador(File texto, int limite, Color colorPalabra, Color colorFondo) {
 		this.texto=archivoATexto(texto);
 		this.limite=limite;
+		this.colorPalabra=colorPalabra;
+		this.colorFondo=colorFondo;
 	}
 
 	public String archivoATexto(File input) {
@@ -86,16 +91,23 @@ public abstract class Generador implements Graficable{
 
 		//experimental
 		for (int i=0; i<cantidadPalabras; i++) {
-			int tonoGris = ((250)/(cantidadPalabras))*(i);
-
-			palabras[i].getLabel().setTextFill( Color.rgb(tonoGris,tonoGris,tonoGris));
+			//int tonoGris = ((250)/(cantidadPalabras))*(i);
+			//y = y1 + ((y2 - y1)/(x2 - x1))*(x - x1) para i=0(x1) transparencia= 1 (y1) , para i=cantidadPalabras-1 (x2) transparencia= transMin(y2)
+			float cant= (float) cantidadPalabras;
+			float index = (float) i;
+			float transpMin = 0.05f;
+			float transparencia = 1 + ((transpMin - 1)/(cant-1))*(index);
+			int R = (int) Math.round(colorPalabra.getRed()*255);
+			int G = (int)Math.round(colorPalabra.getGreen()*255);
+			int B = (int)Math.round(colorPalabra.getBlue()*255);
+			palabras[i].getLabel().setTextFill( Color.rgb(R, G, B, transparencia));
 		}
 	}
 
 	public Scene crearNube() {
 		//crear UI y mostrarala como siempre y regresar la escena con un grupo raiz vacio y ya
 		Group root = new Group();
-		Scene scene = new Scene(root, WIDTH, HEIGHT, Color.WHITE); //cambiar después
+		Scene scene = new Scene(root, WIDTH, HEIGHT, colorFondo); //cambiar después
 		return scene;
 	}
 
