@@ -7,12 +7,10 @@ import javafx.stage.FileChooser;
 
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Button;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.control.*;
 
 import javafx.event.EventHandler;
 import javafx.event.ActionEvent;
@@ -28,12 +26,36 @@ public class Principal extends Application implements EventHandler<ActionEvent>{
 		launch(args);
 	}
 
+        MenuBar menuBar = new MenuBar();
+        Menu menuFormato = new Menu("Formato");
+        ColorPicker colorPickerFondo = new ColorPicker();
+        MenuItem colorFondo = new MenuItem("Color Fondo",colorPickerFondo);
+        ColorPicker colorPickerFuente = new ColorPicker();
+        MenuItem colorFuente = new MenuItem("Color Fuente",colorPickerFuente);
+        Pane root = new Pane();
+
 	@Override
     	public void start(Stage primaryStage) {
 
+		colorFondo.setOnAction(new EventHandler<ActionEvent>() {
+                        public void handle(ActionEvent t) {
+                            colorFondo();
+                        }
+                    });
+
+
+                     colorFuente.setOnAction(new EventHandler<ActionEvent>() {
+                        public void handle(ActionEvent t) {
+                            colorFuente();
+                        }
+                    });
+                     colorFondo.setGraphic(colorPickerFondo);
+                     colorFuente.setGraphic(colorPickerFuente);
+                     menuFormato.getItems().addAll(colorFuente,colorFondo);
+                     menuBar.getMenus().addAll(menuFormato);
+		
 		Label nubeL, archivoPalabrasL, archivoListaL, numeroPalabrasL, respuestaP, respuestaL;
 
-		Group root = new Group();
 		Scene scene = new Scene(root, 550, 500, Color.WHITE);
 		primaryStage.setScene(scene);
 
@@ -129,7 +151,16 @@ public class Principal extends Application implements EventHandler<ActionEvent>{
 
   		primaryStage.show();
     }
+    
+    private void colorFondo() {
+       root.setBackground(new Background(new BackgroundFill(colorPickerFondo.getValue(),null,null)));
+    }
 
+
+    private void colorFuente() {
+       //label1.setTextFill(colorPickerFuente.getValue(),null,null); Aqu[i no se como llamar a las labels para cambiar su color
+    }
+    
     public void handle(ActionEvent e) {
 
     	int lim = 0;
