@@ -15,7 +15,8 @@ public abstract class Generador implements Graficable{
 	protected Palabra[] palabras;
 	protected String texto;
 	protected int limite;
-	protected final int maxFontSize=150;
+	protected final int maxFontSize=220;
+	protected final int minFontSize=28;
 	private final int WIDTH = 1280;
 	private final int HEIGHT = 1000;
 
@@ -64,8 +65,17 @@ public abstract class Generador implements Graficable{
 
 		int frecuenciaMax=palabras[0].getFrecuencia();
 		//el tamaño debe ser proporcional al uso de cada palabra, todo relativo a maxFontSize con regla de 3, el arreglo palabras debe estar ordenado de mayor a menor frecuencia
-		for (Palabra palabra:palabras) {
-			palabra.setFontSize(palabra.getFrecuencia()*maxFontSize/frecuenciaMax);
+		for (int i=0; i<palabras.length ; i++) {
+
+			int fontSize = minFontSize + ((maxFontSize - minFontSize)/(frecuenciaMax - 1))*(palabras[i].getFrecuencia() - 1);
+			//if (fontSize<15) fontSize=15;
+			palabras[i].setFontSize(fontSize);
+			//si la palabra está en el 20% mas usada sera maysuculas
+			float floati = ((float) i);
+			float largo = (float) palabras.length;
+			if (floati/largo<=0.2) {
+				palabras[i].labelAMayus();
+			}
 
 		}
 
@@ -76,22 +86,22 @@ public abstract class Generador implements Graficable{
 
 		//experimental
 		for (int i=0; i<cantidadPalabras; i++) {
-			float transparencia = i/cantidadPalabras;
-			if (transparencia<0.1) transparencia=0.1f;
-			palabras[i].getLabel().setTextFill( Color.hsb(270,0,0.1));
+			int tonoGris = ((250)/(cantidadPalabras))*(i);
+
+			palabras[i].getLabel().setTextFill( Color.rgb(tonoGris,tonoGris,tonoGris));
 		}
 	}
 
 	public Scene crearNube() {
 		//crear UI y mostrarala como siempre y regresar la escena con un grupo raiz vacio y ya
 		Group root = new Group();
-		Scene scene = new Scene(root, WIDTH, HEIGHT, Color.DEEPSKYBLUE); //cambiar después
+		Scene scene = new Scene(root, WIDTH, HEIGHT, Color.WHITE); //cambiar después
 		return scene;
 	}
 
 	public void acomodarPalabras(Scene escena) {
 		for (Palabra palabra : palabras) {
-			System.out.println("La palabra que se acomodara es "+palabra.getContenido()+", ancho: "+palabra.getWidth()+", alto: "+palabra.getHeight());
+		//debugging	System.out.println("La palabra que se acomodara es "+palabra.getContenido()+", ancho: "+palabra.getWidth()+", alto: "+palabra.getHeight());
 			acomodarPalabra(palabra, escena);
 		}
 	}
@@ -122,7 +132,7 @@ public abstract class Generador implements Graficable{
 					etiqueta.setTranslateX(coordX+WIDTH/2);
 					etiqueta.setTranslateY(coordY+HEIGHT/2);
 
-				/*						usado para debuggear
+					/*			//		usado para debuggear
 						Rectangle rect1 = RectangleBuilder.create()
 								.x(coordX+WIDTH/2)
 								.y(coordY+HEIGHT/2)
@@ -130,11 +140,11 @@ public abstract class Generador implements Graficable{
 								.height(palabra.getHeight())
 								.build();
 						((Group)escena.getRoot()).getChildren().add(rect1);
-						*/
+*/
 
 					((Group)escena.getRoot()).getChildren().add(etiqueta);
 					acomodado=true; //ya se acomodo
-					System.out.println("SE ACOMODO "+ palabra.getContenido() + "en coordenadas "+coordX +","+coordY );
+				//debugging	System.out.println("SE ACOMODO "+ palabra.getContenido() + "en coordenadas "+coordX +","+coordY );
 
 				}
 			}
@@ -155,7 +165,7 @@ public abstract class Generador implements Graficable{
 						palabra.setCoordenadas(coordX, coordY);
 						etiqueta.setTranslateX(coordX+WIDTH/2);
 						etiqueta.setTranslateY(coordY+HEIGHT/2);
-/*						usado para debuggear
+			/*			//		usado para debuggear
 						Rectangle rect1 = RectangleBuilder.create()
 								.x(coordX+WIDTH/2)
 								.y(coordY+HEIGHT/2)
@@ -163,12 +173,13 @@ public abstract class Generador implements Graficable{
 								.height(palabra.getHeight())
 								.build();
 						((Group)escena.getRoot()).getChildren().add(rect1);
-						*/
+*/
+
 
 						((Group)escena.getRoot()).getChildren().add(etiqueta);
 
 						acomodado=true; //ya se acomodo
-						System.out.println("SE ACOMODO "+ palabra.getContenido() + "en coordenadas "+coordX +","+coordY );
+				//debugging		System.out.println("SE ACOMODO "+ palabra.getContenido() + "en coordenadas "+coordX +","+coordY );
 
 					}
 				}
@@ -202,7 +213,7 @@ public abstract class Generador implements Graficable{
 				}
 			}
 		}
-		System.out.println("En colosion, ancho:"+palabra.getWidth()+" alto: "+palabra.getHeight());
+		//debugging System.out.println("En colosion, ancho:"+palabra.getWidth()+" alto: "+palabra.getHeight());
 
 		return false;
 	}
@@ -241,10 +252,6 @@ public abstract class Generador implements Graficable{
 				}
 
 			}
-		}
-
-		for (Palabra esta: palabras) {
-			System.out.println("El arreglo se ordeno asi: "+ esta.getContenido()+ " frecuencia: "+ esta.getFrecuencia());
 		}
 
 	}

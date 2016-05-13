@@ -13,7 +13,7 @@ import javafx.geometry.Bounds;
 
 public class Palabra {
 
-	final private String contenido; //es final?
+	private final String contenido;
 	private int frecuencia;
 	private int x=-2147483648; //este numero es la "señal" de que no se han determinado las coordenadas
 	private int y=-2147483648; //este numero es la "señal" de que no se han determinado las coordenadas
@@ -48,13 +48,16 @@ public class Palabra {
 
 		width = (int)com.sun.javafx.tk.Toolkit.getToolkit().getFontLoader().computeStringWidth(contenido, fuente);
 		height = (int)com.sun.javafx.tk.Toolkit.getToolkit().getFontLoader().getFontMetrics(fuente).getLineHeight();
-
-
+		height*=0.78;
 
 	}
 
 	public String getContenido(){
 		return contenido;
+	}
+
+	public void labelAMayus(){
+		label.setText(contenido.toUpperCase());
 	}
 
 	public int getFrecuencia() { return frecuencia; }

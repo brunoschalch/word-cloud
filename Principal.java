@@ -147,7 +147,7 @@ public class Principal extends Application implements EventHandler<ActionEvent>{
         //paso 1: crear objeto
 
     	if(texto!=null && texto.exists()){
-        
+
         	if(listaNegra!=null && listaNegra.exists()){
         		g = new Generador2(texto, listaNegra, lim);
         	}
@@ -175,14 +175,14 @@ public class Principal extends Application implements EventHandler<ActionEvent>{
     	contMenos.setText("La que menos se conto fue: "+p[(p.length-1)].getContenido());
 
     	try{
-		BufferedWriter writer = new BufferedWriter(new FileWriter("cuentas.txt"));
-		for(int i=0; i<p.length; i++){
-			writer.write(p[i].getContenido()+" "+p[i].getFrecuencia()+"/n");
+			BufferedWriter writer = new BufferedWriter(new FileWriter("cuentas.txt"));
+			for(int i=0; i<p.length; i++){
+				writer.write(p[i].getContenido()+" "+p[i].getFrecuencia()+"/n");
+			}
+			writer.close();
 		}
-		writer.close();
-	}
-	catch(IOException ioe){
-		ioe.printStackTrace();
+		catch(IOException ioe){
+			ioe.printStackTrace();
     	}
     }
 }
