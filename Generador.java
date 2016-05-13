@@ -20,7 +20,6 @@ public abstract class Generador implements Graficable{
 	private final int WIDTH = 1280;
 	private final int HEIGHT = 1000;
 
-	//signos en variables -no entiendo este comment
 
 	public Generador(File texto, int limite) {
 		this.texto=archivoATexto(texto);
@@ -46,12 +45,12 @@ public abstract class Generador implements Graficable{
 
 
 
-	public Scene iniciar(){ //no tiene argumentos porque todo está en el estado, es el mismo metodo para generador 1 y generador 2, entonces se queda en la clase padre
+	public Scene iniciar(String t){ //no tiene argumentos porque todo está en el estado, es el mismo metodo para generador 1 y generador 2, entonces se queda en la clase padre
 		llenarArreglo();
 		ordenarArreglo();
 		recortarArreglo();
 		determinarFontSizePorPalabra();
-		determinarTonoPorPalabra();
+		determinarTonoPorPalabra(t);
 		//ahora iniciar UI y acomodar todas las labels donde deben ir
 		Scene escena = crearNube();
 		acomodarPalabras(escena);
@@ -81,14 +80,38 @@ public abstract class Generador implements Graficable{
 
 	}
 
-	public void determinarTonoPorPalabra() {
+	public void determinarTonoPorPalabra(String t) {
 		int cantidadPalabras=palabras.length;
 
-		//experimental
-		for (int i=0; i<cantidadPalabras; i++) {
-			int tonoGris = ((250)/(cantidadPalabras))*(i);
-
-			palabras[i].getLabel().setTextFill( Color.rgb(tonoGris,tonoGris,tonoGris));
+		switch(t){
+			
+			case "gris":
+				for (int i=0; i<cantidadPalabras; i++) {
+					int tonoGris = ((250)/(cantidadPalabras))*(i);
+					palabras[i].getLabel().setTextFill( Color.rgb(tonoGris,tonoGris,tonoGris));
+				}
+				break;
+			
+			case "verde":
+				for (int i=0; i<cantidadPalabras; i++) {
+					int tonoVerde = ((255)/(cantidadPalabras))*(i);
+					palabras[i].getLabel().setTextFill( Color.rgb(0,tonoVerde,0));
+				}
+				break;
+				
+			case "rojo":
+				for (int i=0; i<cantidadPalabras; i++) {
+					int tonoRojo = ((255)/(cantidadPalabras))*(i);
+					palabras[i].getLabel().setTextFill( Color.rgb(tonoRojo,0,0));
+				}
+				break;
+				
+			case "azul":
+				for (int i=0; i<cantidadPalabras; i++) {
+					int tonoAzul = ((255)/(cantidadPalabras))*(i);
+					palabras[i].getLabel().setTextFill( Color.rgb(0,0,tonoAzul));
+				}	
+				break;
 		}
 	}
 
