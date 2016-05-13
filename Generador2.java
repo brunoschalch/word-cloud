@@ -1,11 +1,5 @@
 import java.io.*;
-import javafx.application.Application;
-import javafx.scene.Group;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 import javafx.scene.control.*;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 
 public class Generador2 extends Generador{
 	protected String[] listaNegra;

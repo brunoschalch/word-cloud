@@ -1,15 +1,8 @@
-import javafx.application.Application;
-import javafx.scene.Group;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
+
 import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import com.sun.javafx.tk.Toolkit;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
-import javafx.scene.text.TextBuilder;
-import javafx.geometry.Bounds;
 
 public class Palabra {
 

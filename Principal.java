@@ -33,11 +33,11 @@ public class Principal extends Application implements EventHandler<ActionEvent>{
 
 		Label nubeL, archivoPalabrasL, archivoListaL, numeroPalabrasL, respuestaP, respuestaL;
 
-	      	Group root = new Group();
-	      	Scene scene = new Scene(root, 550, 500, Color.WHITE);
-	      	primaryStage.setScene(scene);
+		Group root = new Group();
+		Scene scene = new Scene(root, 550, 500, Color.WHITE);
+		primaryStage.setScene(scene);
 
-	      	nubeL = new Label("Nube");
+		nubeL = new Label("Nube");
 		archivoPalabrasL = new Label("Archivo principal");
 		archivoListaL = new Label("'Lista Negra'");
 		numeroPalabrasL = new Label("Numero de palabras diferentes que se contaran");
