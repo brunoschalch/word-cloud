@@ -3,7 +3,7 @@ import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 
 public class Generador2 extends Generador{
-	protected String[] listaNegra;
+	private String[] listaNegra;
 
 
 	public Generador2(File texto, File listaNegra, int limite, Color colorPalabra, Color colorFondo) {

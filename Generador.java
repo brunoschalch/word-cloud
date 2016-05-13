@@ -15,8 +15,8 @@ public abstract class Generador implements Graficable{
 	protected Palabra[] palabras;
 	protected String texto;
 	protected int limite;
-	protected final int maxFontSize=220;
-	protected final int minFontSize=28;
+	protected final int MAX_FONT_SIZE=220;
+	protected final int MIN_FONT_SIZE=28;
 	protected Color colorPalabra;
 	protected Color colorFondo;
 	private final int WIDTH = 1280;
@@ -72,7 +72,7 @@ public abstract class Generador implements Graficable{
 		//el tamaño debe ser proporcional al uso de cada palabra, todo relativo a maxFontSize con regla de 3, el arreglo palabras debe estar ordenado de mayor a menor frecuencia
 		for (int i=0; i<palabras.length ; i++) {
 
-			int fontSize = minFontSize + ((maxFontSize - minFontSize)/(frecuenciaMax - 1))*(palabras[i].getFrecuencia() - 1);
+			int fontSize = MIN_FONT_SIZE + ((MAX_FONT_SIZE - MIN_FONT_SIZE)/(frecuenciaMax - 1))*(palabras[i].getFrecuencia() - 1);
 			//if (fontSize<15) fontSize=15;
 			palabras[i].setFontSize(fontSize);
 			//si la palabra está en el 20% mas usada sera maysuculas
