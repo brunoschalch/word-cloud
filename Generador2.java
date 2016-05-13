@@ -63,8 +63,23 @@ public class Generador2 extends Generador{
 	}
 
 	public String[] archivoAArreglo(File input) {
-		//falta este metodo
-		return new String[] {"a","b"};
+
+		String lectura="";
+		try {
+					FileReader fileReader = new FileReader(input);
+			BufferedReader reader = new BufferedReader(fileReader);
+			String line = null;
+			while((line = reader.readLine()) != null) {
+				lectura+=line;
+			}
+			reader.close();
+		}
+		catch(IOException ioe) {
+			ioe.printStackTrace();
+		}
+
+		String[] regresar = lectura.split("\\W+");
+		return regresar;
 	}
 
 }
